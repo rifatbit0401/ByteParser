@@ -1,0 +1,371 @@
+Compiled from "GitBlobStorageTest.java"
+public class org.eclipse.egit.core.storage.GitBlobStorageTest extends org.eclipse.egit.core.test.GitTestCase {
+  org.eclipse.jgit.lib.Repository repository;
+
+  public org.eclipse.egit.core.storage.GitBlobStorageTest();
+    Code:
+       0: aload_0       
+       1: invokespecial #10                 // Method org/eclipse/egit/core/test/GitTestCase."<init>":()V
+       4: return        
+
+  public void setUp() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: invokespecial #22                 // Method org/eclipse/egit/core/test/GitTestCase.setUp:()V
+       4: aload_0       
+       5: aload_0       
+       6: getfield      #24                 // Field gitDir:Ljava/io/File;
+       9: invokestatic  #28                 // Method org/eclipse/jgit/storage/file/FileRepositoryBuilder.create:(Ljava/io/File;)Lorg/eclipse/jgit/lib/Repository;
+      12: putfield      #34                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+      15: aload_0       
+      16: getfield      #34                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+      19: invokevirtual #36                 // Method org/eclipse/jgit/lib/Repository.create:()V
+      22: return        
+
+  public void tearDown() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #34                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+       4: invokevirtual #42                 // Method org/eclipse/jgit/lib/Repository.close:()V
+       7: aload_0       
+       8: invokespecial #45                 // Method org/eclipse/egit/core/test/GitTestCase.tearDown:()V
+      11: return        
+
+  public void testOk() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: aload_0       
+       2: getfield      #34                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+       5: aload_0       
+       6: getfield      #49                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+       9: invokevirtual #53                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      12: ldc           #59                 // String file
+      14: ldc           #61                 // String data
+      16: invokevirtual #63                 // Method createFile:(Lorg/eclipse/jgit/lib/Repository;Lorg/eclipse/core/resources/IProject;Ljava/lang/String;Ljava/lang/String;)Lorg/eclipse/jgit/lib/ObjectId;
+      19: astore_1      
+      20: new           #67                 // class org/eclipse/egit/core/storage/GitBlobStorage
+      23: dup           
+      24: aload_0       
+      25: getfield      #34                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+      28: ldc           #69                 // String p/file
+      30: aload_1       
+      31: invokespecial #71                 // Method org/eclipse/egit/core/storage/GitBlobStorage."<init>":(Lorg/eclipse/jgit/lib/Repository;Ljava/lang/String;Lorg/eclipse/jgit/lib/ObjectId;)V
+      34: astore_2      
+      35: ldc           #59                 // String file
+      37: aload_2       
+      38: invokevirtual #74                 // Method org/eclipse/egit/core/storage/GitBlobStorage.getName:()Ljava/lang/String;
+      41: invokestatic  #78                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      44: ldc           #61                 // String data
+      46: aload_0       
+      47: getfield      #84                 // Field testUtils:Lorg/eclipse/egit/core/test/TestUtils;
+      50: aload_2       
+      51: invokevirtual #88                 // Method org/eclipse/egit/core/storage/GitBlobStorage.getContents:()Ljava/io/InputStream;
+      54: invokevirtual #92                 // Method org/eclipse/egit/core/test/TestUtils.slurpAndClose:(Ljava/io/InputStream;)Ljava/lang/String;
+      57: invokestatic  #78                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      60: ldc           #69                 // String p/file
+      62: invokestatic  #98                 // Method org/eclipse/core/runtime/Path.fromPortableString:(Ljava/lang/String;)Lorg/eclipse/core/runtime/IPath;
+      65: invokeinterface #104,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toOSString:()Ljava/lang/String;
+      70: aload_2       
+      71: invokevirtual #109                // Method org/eclipse/egit/core/storage/GitBlobStorage.getFullPath:()Lorg/eclipse/core/runtime/IPath;
+      74: invokeinterface #104,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toOSString:()Ljava/lang/String;
+      79: invokestatic  #78                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      82: return        
+
+  public void testGitFileHistorySingleProjectOk() throws java.lang.Exception;
+    Code:
+       0: new           #118                // class org/eclipse/core/runtime/NullProgressMonitor
+       3: dup           
+       4: invokespecial #120                // Method org/eclipse/core/runtime/NullProgressMonitor."<init>":()V
+       7: astore_1      
+       8: new           #54                 // class org/eclipse/egit/core/test/TestProject
+      11: dup           
+      12: iconst_1      
+      13: ldc           #121                // String Project-2
+      15: invokespecial #123                // Method org/eclipse/egit/core/test/TestProject."<init>":(ZLjava/lang/String;)V
+      18: astore_2      
+      19: aload_2       
+      20: invokevirtual #53                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      23: astore_3      
+      24: new           #126                // class java/io/File
+      27: dup           
+      28: aload_3       
+      29: invokeinterface #128,  1          // InterfaceMethod org/eclipse/core/resources/IProject.getLocation:()Lorg/eclipse/core/runtime/IPath;
+      34: invokeinterface #133,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toFile:()Ljava/io/File;
+      39: ldc           #137                // String .git
+      41: invokespecial #139                // Method java/io/File."<init>":(Ljava/io/File;Ljava/lang/String;)V
+      44: astore        4
+      46: aload         4
+      48: invokevirtual #142                // Method java/io/File.exists:()Z
+      51: ifeq          60
+      54: aload         4
+      56: iconst_3      
+      57: invokestatic  #146                // Method org/eclipse/jgit/util/FileUtils.delete:(Ljava/io/File;I)V
+      60: aload         4
+      62: invokestatic  #28                 // Method org/eclipse/jgit/storage/file/FileRepositoryBuilder.create:(Ljava/io/File;)Lorg/eclipse/jgit/lib/Repository;
+      65: astore        5
+      67: aload         5
+      69: invokevirtual #36                 // Method org/eclipse/jgit/lib/Repository.create:()V
+      72: invokestatic  #152                // Method org/eclipse/egit/core/Activator.getDefault:()Lorg/eclipse/egit/core/Activator;
+      75: invokevirtual #158                // Method org/eclipse/egit/core/Activator.getRepositoryUtil:()Lorg/eclipse/egit/core/RepositoryUtil;
+      78: aload         4
+      80: invokevirtual #162                // Method org/eclipse/egit/core/RepositoryUtil.addConfiguredRepository:(Ljava/io/File;)Z
+      83: pop           
+      84: new           #168                // class org/eclipse/egit/core/op/ConnectProviderOperation
+      87: dup           
+      88: aload_3       
+      89: aload         4
+      91: invokespecial #170                // Method org/eclipse/egit/core/op/ConnectProviderOperation."<init>":(Lorg/eclipse/core/resources/IProject;Ljava/io/File;)V
+      94: astore        6
+      96: aload         6
+      98: aload_1       
+      99: invokevirtual #173                // Method org/eclipse/egit/core/op/ConnectProviderOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+     102: aload_3       
+     103: ldc           #59                 // String file
+     105: invokeinterface #177,  2          // InterfaceMethod org/eclipse/core/resources/IProject.getFile:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+     110: astore        7
+     112: aload         7
+     114: new           #181                // class java/io/ByteArrayInputStream
+     117: dup           
+     118: ldc           #61                 // String data
+     120: ldc           #183                // String UTF-8
+     122: invokevirtual #185                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+     125: invokespecial #191                // Method java/io/ByteArrayInputStream."<init>":([B)V
+     128: iconst_0      
+     129: aload_1       
+     130: invokeinterface #194,  4          // InterfaceMethod org/eclipse/core/resources/IFile.create:(Ljava/io/InputStream;ILorg/eclipse/core/runtime/IProgressMonitor;)V
+     135: new           #199                // class org/eclipse/jgit/api/Git
+     138: dup           
+     139: aload         5
+     141: invokespecial #201                // Method org/eclipse/jgit/api/Git."<init>":(Lorg/eclipse/jgit/lib/Repository;)V
+     144: astore        8
+     146: aload         8
+     148: invokevirtual #204                // Method org/eclipse/jgit/api/Git.add:()Lorg/eclipse/jgit/api/AddCommand;
+     151: ldc           #208                // String .
+     153: invokevirtual #210                // Method org/eclipse/jgit/api/AddCommand.addFilepattern:(Ljava/lang/String;)Lorg/eclipse/jgit/api/AddCommand;
+     156: invokevirtual #216                // Method org/eclipse/jgit/api/AddCommand.call:()Lorg/eclipse/jgit/dircache/DirCache;
+     159: pop           
+     160: aload         8
+     162: invokevirtual #220                // Method org/eclipse/jgit/api/Git.commit:()Lorg/eclipse/jgit/api/CommitCommand;
+     165: ldc           #224                // String JUnit
+     167: ldc           #226                // String junit@jgit.org
+     169: invokevirtual #228                // Method org/eclipse/jgit/api/CommitCommand.setAuthor:(Ljava/lang/String;Ljava/lang/String;)Lorg/eclipse/jgit/api/CommitCommand;
+     172: iconst_1      
+     173: invokevirtual #234                // Method org/eclipse/jgit/api/CommitCommand.setAll:(Z)Lorg/eclipse/jgit/api/CommitCommand;
+     176: ldc           #238                // String First commit
+     178: invokevirtual #240                // Method org/eclipse/jgit/api/CommitCommand.setMessage:(Ljava/lang/String;)Lorg/eclipse/jgit/api/CommitCommand;
+     181: invokevirtual #244                // Method org/eclipse/jgit/api/CommitCommand.call:()Lorg/eclipse/jgit/revwalk/RevCommit;
+     184: astore        9
+     186: new           #247                // class org/eclipse/egit/core/internal/storage/GitFileHistoryProvider
+     189: dup           
+     190: invokespecial #249                // Method org/eclipse/egit/core/internal/storage/GitFileHistoryProvider."<init>":()V
+     193: astore        10
+     195: aload         10
+     197: aload_2       
+     198: invokevirtual #53                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+     201: iconst_0      
+     202: aconst_null   
+     203: invokevirtual #250                // Method org/eclipse/egit/core/internal/storage/GitFileHistoryProvider.getFileHistoryFor:(Lorg/eclipse/core/resources/IResource;ILorg/eclipse/core/runtime/IProgressMonitor;)Lorg/eclipse/team/core/history/IFileHistory;
+     206: astore        11
+     208: aload         11
+     210: invokestatic  #254                // Method org/junit/Assert.assertNotNull:(Ljava/lang/Object;)V
+     213: aload         11
+     215: invokeinterface #258,  1          // InterfaceMethod org/eclipse/team/core/history/IFileHistory.getFileRevisions:()[Lorg/eclipse/team/core/history/IFileRevision;
+     220: arraylength   
+     221: i2l           
+     222: lconst_1      
+     223: invokestatic  #264                // Method org/junit/Assert.assertEquals:(JJ)V
+     226: aload         11
+     228: aload         9
+     230: invokevirtual #267                // Method org/eclipse/jgit/revwalk/RevCommit.getId:()Lorg/eclipse/jgit/lib/ObjectId;
+     233: invokevirtual #273                // Method org/eclipse/jgit/lib/ObjectId.getName:()Ljava/lang/String;
+     236: invokeinterface #276,  2          // InterfaceMethod org/eclipse/team/core/history/IFileHistory.getFileRevision:(Ljava/lang/String;)Lorg/eclipse/team/core/history/IFileRevision;
+     241: invokestatic  #254                // Method org/junit/Assert.assertNotNull:(Ljava/lang/Object;)V
+     244: goto          292
+     247: astore        12
+     249: new           #280                // class org/eclipse/egit/core/op/DisconnectProviderOperation
+     252: dup           
+     253: aload_3       
+     254: invokestatic  #282                // Method java/util/Collections.singletonList:(Ljava/lang/Object;)Ljava/util/List;
+     257: invokespecial #288                // Method org/eclipse/egit/core/op/DisconnectProviderOperation."<init>":(Ljava/util/Collection;)V
+     260: astore        13
+     262: aload         13
+     264: aload_1       
+     265: invokevirtual #291                // Method org/eclipse/egit/core/op/DisconnectProviderOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+     268: invokestatic  #152                // Method org/eclipse/egit/core/Activator.getDefault:()Lorg/eclipse/egit/core/Activator;
+     271: invokevirtual #158                // Method org/eclipse/egit/core/Activator.getRepositoryUtil:()Lorg/eclipse/egit/core/RepositoryUtil;
+     274: aload         4
+     276: invokevirtual #292                // Method org/eclipse/egit/core/RepositoryUtil.removeDir:(Ljava/io/File;)Z
+     279: pop           
+     280: aload         5
+     282: invokevirtual #42                 // Method org/eclipse/jgit/lib/Repository.close:()V
+     285: aload_2       
+     286: invokevirtual #295                // Method org/eclipse/egit/core/test/TestProject.dispose:()V
+     289: aload         12
+     291: athrow        
+     292: new           #280                // class org/eclipse/egit/core/op/DisconnectProviderOperation
+     295: dup           
+     296: aload_3       
+     297: invokestatic  #282                // Method java/util/Collections.singletonList:(Ljava/lang/Object;)Ljava/util/List;
+     300: invokespecial #288                // Method org/eclipse/egit/core/op/DisconnectProviderOperation."<init>":(Ljava/util/Collection;)V
+     303: astore        13
+     305: aload         13
+     307: aload_1       
+     308: invokevirtual #291                // Method org/eclipse/egit/core/op/DisconnectProviderOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+     311: invokestatic  #152                // Method org/eclipse/egit/core/Activator.getDefault:()Lorg/eclipse/egit/core/Activator;
+     314: invokevirtual #158                // Method org/eclipse/egit/core/Activator.getRepositoryUtil:()Lorg/eclipse/egit/core/RepositoryUtil;
+     317: aload         4
+     319: invokevirtual #292                // Method org/eclipse/egit/core/RepositoryUtil.removeDir:(Ljava/io/File;)Z
+     322: pop           
+     323: aload         5
+     325: invokevirtual #42                 // Method org/eclipse/jgit/lib/Repository.close:()V
+     328: aload_2       
+     329: invokevirtual #295                // Method org/eclipse/egit/core/test/TestProject.dispose:()V
+     332: return        
+    Exception table:
+       from    to  target type
+         102   247   247   any
+
+  public void testFailNotFound() throws java.lang.Exception;
+    Code:
+       0: new           #67                 // class org/eclipse/egit/core/storage/GitBlobStorage
+       3: dup           
+       4: aload_0       
+       5: getfield      #34                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+       8: ldc           #59                 // String file
+      10: ldc_w         #323                // String 0123456789012345678901234567890123456789
+      13: invokestatic  #325                // Method org/eclipse/jgit/lib/ObjectId.fromString:(Ljava/lang/String;)Lorg/eclipse/jgit/lib/ObjectId;
+      16: invokespecial #71                 // Method org/eclipse/egit/core/storage/GitBlobStorage."<init>":(Lorg/eclipse/jgit/lib/Repository;Ljava/lang/String;Lorg/eclipse/jgit/lib/ObjectId;)V
+      19: astore_1      
+      20: ldc           #59                 // String file
+      22: aload_1       
+      23: invokevirtual #74                 // Method org/eclipse/egit/core/storage/GitBlobStorage.getName:()Ljava/lang/String;
+      26: invokestatic  #78                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      29: aload_1       
+      30: invokevirtual #88                 // Method org/eclipse/egit/core/storage/GitBlobStorage.getContents:()Ljava/io/InputStream;
+      33: pop           
+      34: ldc_w         #329                // String We should not be able to read this 'blob'
+      37: invokestatic  #331                // Method org/junit/Assert.fail:(Ljava/lang/String;)V
+      40: goto          54
+      43: astore_2      
+      44: ldc_w         #335                // String Git blob 0123456789012345678901234567890123456789 with path file not found
+      47: aload_2       
+      48: invokevirtual #337                // Method org/eclipse/core/runtime/CoreException.getMessage:()Ljava/lang/String;
+      51: invokestatic  #78                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      54: return        
+    Exception table:
+       from    to  target type
+          29    40    43   Class org/eclipse/core/runtime/CoreException
+
+  public void testFailWrongType() throws java.lang.Exception;
+    Code:
+       0: new           #67                 // class org/eclipse/egit/core/storage/GitBlobStorage
+       3: dup           
+       4: aload_0       
+       5: getfield      #34                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+       8: ldc           #59                 // String file
+      10: ldc_w         #345                // String 4b825dc642cb6eb9a060e54bf8d69288fbee4904
+      13: invokestatic  #325                // Method org/eclipse/jgit/lib/ObjectId.fromString:(Ljava/lang/String;)Lorg/eclipse/jgit/lib/ObjectId;
+      16: invokespecial #71                 // Method org/eclipse/egit/core/storage/GitBlobStorage."<init>":(Lorg/eclipse/jgit/lib/Repository;Ljava/lang/String;Lorg/eclipse/jgit/lib/ObjectId;)V
+      19: astore_1      
+      20: ldc           #59                 // String file
+      22: aload_1       
+      23: invokevirtual #74                 // Method org/eclipse/egit/core/storage/GitBlobStorage.getName:()Ljava/lang/String;
+      26: invokestatic  #78                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      29: aload_1       
+      30: invokevirtual #88                 // Method org/eclipse/egit/core/storage/GitBlobStorage.getContents:()Ljava/io/InputStream;
+      33: pop           
+      34: ldc_w         #347                // String We should not be able to read this blob
+      37: invokestatic  #331                // Method org/junit/Assert.fail:(Ljava/lang/String;)V
+      40: goto          54
+      43: astore_2      
+      44: ldc_w         #349                // String Git blob 4b825dc642cb6eb9a060e54bf8d69288fbee4904 with path file not found
+      47: aload_2       
+      48: invokevirtual #337                // Method org/eclipse/core/runtime/CoreException.getMessage:()Ljava/lang/String;
+      51: invokestatic  #78                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      54: return        
+    Exception table:
+       from    to  target type
+          29    40    43   Class org/eclipse/core/runtime/CoreException
+
+  public void testFailCorrupt() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: aload_0       
+       2: getfield      #34                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+       5: aload_0       
+       6: getfield      #49                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+       9: invokevirtual #53                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      12: ldc           #59                 // String file
+      14: ldc           #61                 // String data
+      16: invokevirtual #352                // Method createFileCorruptShort:(Lorg/eclipse/jgit/lib/Repository;Lorg/eclipse/core/resources/IProject;Ljava/lang/String;Ljava/lang/String;)Lorg/eclipse/jgit/lib/ObjectId;
+      19: pop           
+      20: new           #67                 // class org/eclipse/egit/core/storage/GitBlobStorage
+      23: dup           
+      24: aload_0       
+      25: getfield      #34                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+      28: ldc           #59                 // String file
+      30: ldc_w         #355                // String 6320cd248dd8aeaab759d5871f8781b5c0505172
+      33: invokestatic  #325                // Method org/eclipse/jgit/lib/ObjectId.fromString:(Ljava/lang/String;)Lorg/eclipse/jgit/lib/ObjectId;
+      36: invokespecial #71                 // Method org/eclipse/egit/core/storage/GitBlobStorage."<init>":(Lorg/eclipse/jgit/lib/Repository;Ljava/lang/String;Lorg/eclipse/jgit/lib/ObjectId;)V
+      39: astore_1      
+      40: ldc           #59                 // String file
+      42: aload_1       
+      43: invokevirtual #74                 // Method org/eclipse/egit/core/storage/GitBlobStorage.getName:()Ljava/lang/String;
+      46: invokestatic  #78                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      49: aload_1       
+      50: invokevirtual #88                 // Method org/eclipse/egit/core/storage/GitBlobStorage.getContents:()Ljava/io/InputStream;
+      53: pop           
+      54: ldc_w         #347                // String We should not be able to read this blob
+      57: invokestatic  #331                // Method org/junit/Assert.fail:(Ljava/lang/String;)V
+      60: goto          74
+      63: astore_1      
+      64: ldc_w         #357                // String IO error reading Git blob 6320cd248dd8aeaab759d5871f8781b5c0505172 with path file
+      67: aload_1       
+      68: invokevirtual #337                // Method org/eclipse/core/runtime/CoreException.getMessage:()Ljava/lang/String;
+      71: invokestatic  #78                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      74: return        
+    Exception table:
+       from    to  target type
+           0    60    63   Class org/eclipse/core/runtime/CoreException
+
+  public void testFailCorrupt2() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: aload_0       
+       2: getfield      #34                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+       5: aload_0       
+       6: getfield      #49                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+       9: invokevirtual #53                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      12: ldc           #59                 // String file
+      14: ldc_w         #360                // String datjhjhjhjhjhjhjjkujioedfughjuop986rdfghjhiu7867586redtfguy675r6tfguhyo76r7tfa
+      17: invokevirtual #352                // Method createFileCorruptShort:(Lorg/eclipse/jgit/lib/Repository;Lorg/eclipse/core/resources/IProject;Ljava/lang/String;Ljava/lang/String;)Lorg/eclipse/jgit/lib/ObjectId;
+      20: pop           
+      21: new           #67                 // class org/eclipse/egit/core/storage/GitBlobStorage
+      24: dup           
+      25: aload_0       
+      26: getfield      #34                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+      29: ldc           #59                 // String file
+      31: ldc_w         #362                // String 526ef34fc76ab0c35ccee343bda1a626efbd4134
+      34: invokestatic  #325                // Method org/eclipse/jgit/lib/ObjectId.fromString:(Ljava/lang/String;)Lorg/eclipse/jgit/lib/ObjectId;
+      37: invokespecial #71                 // Method org/eclipse/egit/core/storage/GitBlobStorage."<init>":(Lorg/eclipse/jgit/lib/Repository;Ljava/lang/String;Lorg/eclipse/jgit/lib/ObjectId;)V
+      40: astore_1      
+      41: ldc           #59                 // String file
+      43: aload_1       
+      44: invokevirtual #74                 // Method org/eclipse/egit/core/storage/GitBlobStorage.getName:()Ljava/lang/String;
+      47: invokestatic  #78                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      50: aload_1       
+      51: invokevirtual #88                 // Method org/eclipse/egit/core/storage/GitBlobStorage.getContents:()Ljava/io/InputStream;
+      54: pop           
+      55: ldc_w         #347                // String We should not be able to read this blob
+      58: invokestatic  #331                // Method org/junit/Assert.fail:(Ljava/lang/String;)V
+      61: goto          75
+      64: astore_1      
+      65: ldc_w         #364                // String IO error reading Git blob 526ef34fc76ab0c35ccee343bda1a626efbd4134 with path file
+      68: aload_1       
+      69: invokevirtual #337                // Method org/eclipse/core/runtime/CoreException.getMessage:()Ljava/lang/String;
+      72: invokestatic  #78                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      75: return        
+    Exception table:
+       from    to  target type
+           0    61    64   Class org/eclipse/core/runtime/CoreException
+}

@@ -1,0 +1,547 @@
+Compiled from "EGitSecureStoreTest.java"
+public class org.eclipse.egit.core.securestorage.EGitSecureStoreTest {
+  org.eclipse.equinox.security.storage.ISecurePreferences secureStoreForTest;
+
+  org.eclipse.egit.core.securestorage.EGitSecureStore store;
+
+  public org.eclipse.egit.core.securestorage.EGitSecureStoreTest();
+    Code:
+       0: aload_0       
+       1: invokespecial #12                 // Method java/lang/Object."<init>":()V
+       4: return        
+
+  public void setUp() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: invokespecial #24                 // Method setupNewSecureStore:()V
+       4: aload_0       
+       5: new           #27                 // class org/eclipse/egit/core/securestorage/EGitSecureStore
+       8: dup           
+       9: aload_0       
+      10: getfield      #29                 // Field secureStoreForTest:Lorg/eclipse/equinox/security/storage/ISecurePreferences;
+      13: invokespecial #31                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore."<init>":(Lorg/eclipse/equinox/security/storage/ISecurePreferences;)V
+      16: putfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      19: return        
+
+  public void tearDown() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #29                 // Field secureStoreForTest:Lorg/eclipse/equinox/security/storage/ISecurePreferences;
+       4: invokeinterface #38,  1           // InterfaceMethod org/eclipse/equinox/security/storage/ISecurePreferences.flush:()V
+       9: return        
+
+  public void testPutUserAndPassword() throws java.lang.Exception;
+    Code:
+       0: new           #45                 // class org/eclipse/jgit/transport/URIish
+       3: dup           
+       4: ldc           #47                 // String http://testRepo.example.com/testrepo
+       6: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+       9: astore_1      
+      10: new           #52                 // class org/eclipse/egit/core/securestorage/UserPasswordCredentials
+      13: dup           
+      14: ldc           #54                 // String agitter
+      16: ldc           #56                 // String letmein
+      18: invokespecial #58                 // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      21: astore_2      
+      22: aload_0       
+      23: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      26: aload_1       
+      27: aload_2       
+      28: invokevirtual #61                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore.putCredentials:(Lorg/eclipse/jgit/transport/URIish;Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;)V
+      31: aload_0       
+      32: getfield      #29                 // Field secureStoreForTest:Lorg/eclipse/equinox/security/storage/ISecurePreferences;
+      35: aload_1       
+      36: invokestatic  #65                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore.calcNodePath:(Lorg/eclipse/jgit/transport/URIish;)Ljava/lang/String;
+      39: invokevirtual #69                 // Method java/lang/String.toString:()Ljava/lang/String;
+      42: invokeinterface #75,  2           // InterfaceMethod org/eclipse/equinox/security/storage/ISecurePreferences.node:(Ljava/lang/String;)Lorg/eclipse/equinox/security/storage/ISecurePreferences;
+      47: astore_3      
+      48: ldc           #54                 // String agitter
+      50: aload_3       
+      51: ldc           #79                 // String user
+      53: aconst_null   
+      54: invokeinterface #81,  3           // InterfaceMethod org/eclipse/equinox/security/storage/ISecurePreferences.get:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      59: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      62: aload_3       
+      63: ldc           #91                 // String password
+      65: invokeinterface #93,  2           // InterfaceMethod org/eclipse/equinox/security/storage/ISecurePreferences.isEncrypted:(Ljava/lang/String;)Z
+      70: invokestatic  #97                 // Method org/junit/Assert.assertTrue:(Z)V
+      73: ldc           #56                 // String letmein
+      75: aload_3       
+      76: ldc           #91                 // String password
+      78: aconst_null   
+      79: invokeinterface #81,  3           // InterfaceMethod org/eclipse/equinox/security/storage/ISecurePreferences.get:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      84: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      87: return        
+
+  public void testGetUserAndPassword() throws java.lang.Exception;
+    Code:
+       0: new           #45                 // class org/eclipse/jgit/transport/URIish
+       3: dup           
+       4: ldc           #47                 // String http://testRepo.example.com/testrepo
+       6: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+       9: astore_1      
+      10: new           #52                 // class org/eclipse/egit/core/securestorage/UserPasswordCredentials
+      13: dup           
+      14: ldc           #54                 // String agitter
+      16: ldc           #56                 // String letmein
+      18: invokespecial #58                 // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      21: astore_2      
+      22: aload_0       
+      23: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      26: aload_1       
+      27: aload_2       
+      28: invokevirtual #61                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore.putCredentials:(Lorg/eclipse/jgit/transport/URIish;Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;)V
+      31: aload_0       
+      32: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      35: aload_1       
+      36: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      39: astore_3      
+      40: ldc           #54                 // String agitter
+      42: aload_3       
+      43: invokevirtual #110                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getUser:()Ljava/lang/String;
+      46: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      49: ldc           #56                 // String letmein
+      51: aload_3       
+      52: invokevirtual #113                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getPassword:()Ljava/lang/String;
+      55: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      58: return        
+
+  public void testGetUserAndPasswordUnknownURI() throws java.lang.Exception;
+    Code:
+       0: new           #45                 // class org/eclipse/jgit/transport/URIish
+       3: dup           
+       4: ldc           #47                 // String http://testRepo.example.com/testrepo
+       6: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+       9: astore_1      
+      10: aload_0       
+      11: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      14: aload_1       
+      15: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      18: astore_2      
+      19: aload_2       
+      20: invokestatic  #118                // Method org/junit/Assert.assertNull:(Ljava/lang/Object;)V
+      23: return        
+
+  public void testPutUserAndPasswordURIContainingUserAndPass() throws java.lang.Exception;
+    Code:
+       0: new           #45                 // class org/eclipse/jgit/transport/URIish
+       3: dup           
+       4: ldc           #123                // String http://user:pass@testRepo.example.com/testrepo
+       6: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+       9: astore_1      
+      10: new           #52                 // class org/eclipse/egit/core/securestorage/UserPasswordCredentials
+      13: dup           
+      14: ldc           #54                 // String agitter
+      16: ldc           #56                 // String letmein
+      18: invokespecial #58                 // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      21: astore_2      
+      22: aload_0       
+      23: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      26: aload_1       
+      27: aload_2       
+      28: invokevirtual #61                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore.putCredentials:(Lorg/eclipse/jgit/transport/URIish;Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;)V
+      31: aload_0       
+      32: getfield      #29                 // Field secureStoreForTest:Lorg/eclipse/equinox/security/storage/ISecurePreferences;
+      35: aload_1       
+      36: invokestatic  #65                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore.calcNodePath:(Lorg/eclipse/jgit/transport/URIish;)Ljava/lang/String;
+      39: invokevirtual #69                 // Method java/lang/String.toString:()Ljava/lang/String;
+      42: invokeinterface #75,  2           // InterfaceMethod org/eclipse/equinox/security/storage/ISecurePreferences.node:(Ljava/lang/String;)Lorg/eclipse/equinox/security/storage/ISecurePreferences;
+      47: astore_3      
+      48: ldc           #54                 // String agitter
+      50: aload_3       
+      51: ldc           #79                 // String user
+      53: aconst_null   
+      54: invokeinterface #81,  3           // InterfaceMethod org/eclipse/equinox/security/storage/ISecurePreferences.get:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      59: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      62: aload_3       
+      63: ldc           #91                 // String password
+      65: invokeinterface #93,  2           // InterfaceMethod org/eclipse/equinox/security/storage/ISecurePreferences.isEncrypted:(Ljava/lang/String;)Z
+      70: invokestatic  #97                 // Method org/junit/Assert.assertTrue:(Z)V
+      73: ldc           #56                 // String letmein
+      75: aload_3       
+      76: ldc           #91                 // String password
+      78: aconst_null   
+      79: invokeinterface #81,  3           // InterfaceMethod org/eclipse/equinox/security/storage/ISecurePreferences.get:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+      84: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      87: return        
+
+  public void testGetUserAndPasswordURIContainingUserAndPass() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+       4: new           #45                 // class org/eclipse/jgit/transport/URIish
+       7: dup           
+       8: ldc           #47                 // String http://testRepo.example.com/testrepo
+      10: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+      13: new           #52                 // class org/eclipse/egit/core/securestorage/UserPasswordCredentials
+      16: dup           
+      17: ldc           #54                 // String agitter
+      19: ldc           #56                 // String letmein
+      21: invokespecial #58                 // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      24: invokevirtual #61                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore.putCredentials:(Lorg/eclipse/jgit/transport/URIish;Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;)V
+      27: aload_0       
+      28: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      31: new           #45                 // class org/eclipse/jgit/transport/URIish
+      34: dup           
+      35: ldc           #126                // String http://agitter:letmein@testRepo.example.com/testrepo
+      37: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+      40: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      43: astore_1      
+      44: ldc           #54                 // String agitter
+      46: aload_1       
+      47: invokevirtual #110                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getUser:()Ljava/lang/String;
+      50: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      53: ldc           #56                 // String letmein
+      55: aload_1       
+      56: invokevirtual #113                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getPassword:()Ljava/lang/String;
+      59: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      62: return        
+
+  public void testGetUserAndPasswordURIContainingOtherUserAndPass() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+       4: new           #45                 // class org/eclipse/jgit/transport/URIish
+       7: dup           
+       8: ldc           #47                 // String http://testRepo.example.com/testrepo
+      10: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+      13: new           #52                 // class org/eclipse/egit/core/securestorage/UserPasswordCredentials
+      16: dup           
+      17: ldc           #54                 // String agitter
+      19: ldc           #56                 // String letmein
+      21: invokespecial #58                 // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      24: invokevirtual #61                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore.putCredentials:(Lorg/eclipse/jgit/transport/URIish;Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;)V
+      27: aload_0       
+      28: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      31: new           #45                 // class org/eclipse/jgit/transport/URIish
+      34: dup           
+      35: ldc           #129                // String http://otheruser:otherpass@testRepo.example.com/testrepo
+      37: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+      40: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      43: invokestatic  #118                // Method org/junit/Assert.assertNull:(Ljava/lang/Object;)V
+      46: return        
+
+  public void testClearCredentials() throws java.lang.Exception;
+    Code:
+       0: new           #45                 // class org/eclipse/jgit/transport/URIish
+       3: dup           
+       4: ldc           #47                 // String http://testRepo.example.com/testrepo
+       6: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+       9: astore_1      
+      10: new           #52                 // class org/eclipse/egit/core/securestorage/UserPasswordCredentials
+      13: dup           
+      14: ldc           #54                 // String agitter
+      16: ldc           #56                 // String letmein
+      18: invokespecial #58                 // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      21: astore_2      
+      22: aload_0       
+      23: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      26: aload_1       
+      27: aload_2       
+      28: invokevirtual #61                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore.putCredentials:(Lorg/eclipse/jgit/transport/URIish;Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;)V
+      31: aload_0       
+      32: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      35: aload_1       
+      36: invokevirtual #132                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.clearCredentials:(Lorg/eclipse/jgit/transport/URIish;)V
+      39: aconst_null   
+      40: aload_0       
+      41: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      44: aload_1       
+      45: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      48: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      51: return        
+
+  public void testEnsureDefaultPortHttp() throws java.lang.Exception;
+    Code:
+       0: new           #45                 // class org/eclipse/jgit/transport/URIish
+       3: dup           
+       4: ldc           #47                 // String http://testRepo.example.com/testrepo
+       6: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+       9: astore_1      
+      10: new           #52                 // class org/eclipse/egit/core/securestorage/UserPasswordCredentials
+      13: dup           
+      14: ldc           #54                 // String agitter
+      16: ldc           #56                 // String letmein
+      18: invokespecial #58                 // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      21: astore_2      
+      22: aload_0       
+      23: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      26: aload_1       
+      27: aload_2       
+      28: invokevirtual #61                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore.putCredentials:(Lorg/eclipse/jgit/transport/URIish;Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;)V
+      31: new           #45                 // class org/eclipse/jgit/transport/URIish
+      34: dup           
+      35: ldc           #137                // String http://testRepo.example.com:80/testrepo
+      37: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+      40: astore_3      
+      41: aload_2       
+      42: invokevirtual #110                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getUser:()Ljava/lang/String;
+      45: aload_0       
+      46: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      49: aload_3       
+      50: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      53: invokevirtual #110                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getUser:()Ljava/lang/String;
+      56: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      59: aload_2       
+      60: invokevirtual #113                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getPassword:()Ljava/lang/String;
+      63: aload_0       
+      64: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      67: aload_3       
+      68: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      71: invokevirtual #113                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getPassword:()Ljava/lang/String;
+      74: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      77: return        
+
+  public void testEnsureDefaultPortHttps() throws java.lang.Exception;
+    Code:
+       0: new           #45                 // class org/eclipse/jgit/transport/URIish
+       3: dup           
+       4: ldc           #141                // String https://testRepo.example.com/testrepo
+       6: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+       9: astore_1      
+      10: new           #52                 // class org/eclipse/egit/core/securestorage/UserPasswordCredentials
+      13: dup           
+      14: ldc           #54                 // String agitter
+      16: ldc           #56                 // String letmein
+      18: invokespecial #58                 // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      21: astore_2      
+      22: aload_0       
+      23: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      26: aload_1       
+      27: aload_2       
+      28: invokevirtual #61                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore.putCredentials:(Lorg/eclipse/jgit/transport/URIish;Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;)V
+      31: new           #45                 // class org/eclipse/jgit/transport/URIish
+      34: dup           
+      35: ldc           #143                // String https://testRepo.example.com:443/testrepo
+      37: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+      40: astore_3      
+      41: aload_2       
+      42: invokevirtual #110                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getUser:()Ljava/lang/String;
+      45: aload_0       
+      46: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      49: aload_3       
+      50: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      53: invokevirtual #110                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getUser:()Ljava/lang/String;
+      56: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      59: aload_2       
+      60: invokevirtual #113                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getPassword:()Ljava/lang/String;
+      63: aload_0       
+      64: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      67: aload_3       
+      68: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      71: invokevirtual #113                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getPassword:()Ljava/lang/String;
+      74: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      77: return        
+
+  public void testEnsureDefaultPortSftp() throws java.lang.Exception;
+    Code:
+       0: new           #45                 // class org/eclipse/jgit/transport/URIish
+       3: dup           
+       4: ldc           #146                // String sftp://testRepo.example.com/testrepo
+       6: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+       9: astore_1      
+      10: new           #52                 // class org/eclipse/egit/core/securestorage/UserPasswordCredentials
+      13: dup           
+      14: ldc           #54                 // String agitter
+      16: ldc           #56                 // String letmein
+      18: invokespecial #58                 // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      21: astore_2      
+      22: aload_0       
+      23: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      26: aload_1       
+      27: aload_2       
+      28: invokevirtual #61                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore.putCredentials:(Lorg/eclipse/jgit/transport/URIish;Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;)V
+      31: new           #45                 // class org/eclipse/jgit/transport/URIish
+      34: dup           
+      35: ldc           #148                // String sftp://testRepo.example.com:22/testrepo
+      37: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+      40: astore_3      
+      41: aload_2       
+      42: invokevirtual #110                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getUser:()Ljava/lang/String;
+      45: aload_0       
+      46: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      49: aload_3       
+      50: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      53: invokevirtual #110                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getUser:()Ljava/lang/String;
+      56: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      59: aload_2       
+      60: invokevirtual #113                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getPassword:()Ljava/lang/String;
+      63: aload_0       
+      64: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      67: aload_3       
+      68: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      71: invokevirtual #113                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getPassword:()Ljava/lang/String;
+      74: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      77: return        
+
+  public void testEnsureDefaultPortFtp() throws java.lang.Exception;
+    Code:
+       0: new           #45                 // class org/eclipse/jgit/transport/URIish
+       3: dup           
+       4: ldc           #151                // String ftp://testRepo.example.com/testrepo
+       6: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+       9: astore_1      
+      10: new           #52                 // class org/eclipse/egit/core/securestorage/UserPasswordCredentials
+      13: dup           
+      14: ldc           #54                 // String agitter
+      16: ldc           #56                 // String letmein
+      18: invokespecial #58                 // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      21: astore_2      
+      22: aload_0       
+      23: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      26: aload_1       
+      27: aload_2       
+      28: invokevirtual #61                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore.putCredentials:(Lorg/eclipse/jgit/transport/URIish;Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;)V
+      31: new           #45                 // class org/eclipse/jgit/transport/URIish
+      34: dup           
+      35: ldc           #153                // String ftp://testRepo.example.com:21/testrepo
+      37: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+      40: astore_3      
+      41: aload_2       
+      42: invokevirtual #110                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getUser:()Ljava/lang/String;
+      45: aload_0       
+      46: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      49: aload_3       
+      50: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      53: invokevirtual #110                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getUser:()Ljava/lang/String;
+      56: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      59: aload_2       
+      60: invokevirtual #113                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getPassword:()Ljava/lang/String;
+      63: aload_0       
+      64: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      67: aload_3       
+      68: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      71: invokevirtual #113                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getPassword:()Ljava/lang/String;
+      74: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      77: return        
+
+  public void testEnsureDefaultPortSsh() throws java.lang.Exception;
+    Code:
+       0: new           #45                 // class org/eclipse/jgit/transport/URIish
+       3: dup           
+       4: ldc           #156                // String ssh://agitter@testRepo.example.com/testrepo
+       6: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+       9: astore_1      
+      10: new           #52                 // class org/eclipse/egit/core/securestorage/UserPasswordCredentials
+      13: dup           
+      14: ldc           #54                 // String agitter
+      16: ldc           #56                 // String letmein
+      18: invokespecial #58                 // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      21: astore_2      
+      22: aload_0       
+      23: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      26: aload_1       
+      27: aload_2       
+      28: invokevirtual #61                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore.putCredentials:(Lorg/eclipse/jgit/transport/URIish;Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;)V
+      31: new           #45                 // class org/eclipse/jgit/transport/URIish
+      34: dup           
+      35: ldc           #158                // String ssh://testRepo.example.com:22/testrepo
+      37: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+      40: astore_3      
+      41: aload_2       
+      42: invokevirtual #110                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getUser:()Ljava/lang/String;
+      45: aload_0       
+      46: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      49: aload_3       
+      50: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      53: invokevirtual #110                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getUser:()Ljava/lang/String;
+      56: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      59: aload_2       
+      60: invokevirtual #113                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getPassword:()Ljava/lang/String;
+      63: aload_0       
+      64: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      67: aload_3       
+      68: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      71: invokevirtual #113                // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials.getPassword:()Ljava/lang/String;
+      74: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      77: return        
+
+  public void testClearCredentialsTwice() throws java.lang.Exception;
+    Code:
+       0: new           #45                 // class org/eclipse/jgit/transport/URIish
+       3: dup           
+       4: ldc           #47                 // String http://testRepo.example.com/testrepo
+       6: invokespecial #49                 // Method org/eclipse/jgit/transport/URIish."<init>":(Ljava/lang/String;)V
+       9: astore_1      
+      10: new           #52                 // class org/eclipse/egit/core/securestorage/UserPasswordCredentials
+      13: dup           
+      14: ldc           #54                 // String agitter
+      16: ldc           #56                 // String letmein
+      18: invokespecial #58                 // Method org/eclipse/egit/core/securestorage/UserPasswordCredentials."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      21: astore_2      
+      22: aload_0       
+      23: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      26: aload_1       
+      27: aload_2       
+      28: invokevirtual #61                 // Method org/eclipse/egit/core/securestorage/EGitSecureStore.putCredentials:(Lorg/eclipse/jgit/transport/URIish;Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;)V
+      31: aload_0       
+      32: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      35: aload_1       
+      36: invokevirtual #132                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.clearCredentials:(Lorg/eclipse/jgit/transport/URIish;)V
+      39: aconst_null   
+      40: aload_0       
+      41: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      44: aload_1       
+      45: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      48: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      51: aload_0       
+      52: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      55: aload_1       
+      56: invokevirtual #132                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.clearCredentials:(Lorg/eclipse/jgit/transport/URIish;)V
+      59: aconst_null   
+      60: aload_0       
+      61: getfield      #34                 // Field store:Lorg/eclipse/egit/core/securestorage/EGitSecureStore;
+      64: aload_1       
+      65: invokevirtual #106                // Method org/eclipse/egit/core/securestorage/EGitSecureStore.getCredentials:(Lorg/eclipse/jgit/transport/URIish;)Lorg/eclipse/egit/core/securestorage/UserPasswordCredentials;
+      68: invokestatic  #85                 // Method org/junit/Assert.assertEquals:(Ljava/lang/Object;Ljava/lang/Object;)V
+      71: return        
+
+  private void setupNewSecureStore() throws java.io.IOException, java.net.MalformedURLException;
+    Code:
+       0: new           #165                // class java/util/HashMap
+       3: dup           
+       4: invokespecial #167                // Method java/util/HashMap."<init>":()V
+       7: astore_1      
+       8: aload_1       
+       9: ldc           #168                // String org.eclipse.equinox.security.storage.defaultPassword
+      11: new           #170                // class javax/crypto/spec/PBEKeySpec
+      14: dup           
+      15: ldc           #172                // String masterpass
+      17: invokevirtual #174                // Method java/lang/String.toCharArray:()[C
+      20: invokespecial #178                // Method javax/crypto/spec/PBEKeySpec."<init>":([C)V
+      23: invokevirtual #181                // Method java/util/HashMap.put:(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+      26: pop           
+      27: invokestatic  #185                // Method org/eclipse/core/resources/ResourcesPlugin.getWorkspace:()Lorg/eclipse/core/resources/IWorkspace;
+      30: invokeinterface #191,  1          // InterfaceMethod org/eclipse/core/resources/IWorkspace.getRoot:()Lorg/eclipse/core/resources/IWorkspaceRoot;
+      35: invokeinterface #197,  1          // InterfaceMethod org/eclipse/core/resources/IWorkspaceRoot.getLocation:()Lorg/eclipse/core/runtime/IPath;
+      40: ldc           #203                // String testSecureStore
+      42: invokeinterface #205,  2          // InterfaceMethod org/eclipse/core/runtime/IPath.append:(Ljava/lang/String;)Lorg/eclipse/core/runtime/IPath;
+      47: invokeinterface #211,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toOSString:()Ljava/lang/String;
+      52: astore_2      
+      53: new           #214                // class java/io/File
+      56: dup           
+      57: aload_2       
+      58: invokespecial #216                // Method java/io/File."<init>":(Ljava/lang/String;)V
+      61: astore_3      
+      62: aload_3       
+      63: invokevirtual #217                // Method java/io/File.exists:()Z
+      66: ifeq          74
+      69: aload_3       
+      70: iconst_3      
+      71: invokestatic  #221                // Method org/eclipse/jgit/util/FileUtils.delete:(Ljava/io/File;I)V
+      74: aload_3       
+      75: invokevirtual #227                // Method java/io/File.toURI:()Ljava/net/URI;
+      78: invokevirtual #231                // Method java/net/URI.toURL:()Ljava/net/URL;
+      81: astore        4
+      83: aload_0       
+      84: aload         4
+      86: aload_1       
+      87: invokestatic  #237                // Method org/eclipse/equinox/security/storage/SecurePreferencesFactory.open:(Ljava/net/URL;Ljava/util/Map;)Lorg/eclipse/equinox/security/storage/ISecurePreferences;
+      90: putfield      #29                 // Field secureStoreForTest:Lorg/eclipse/equinox/security/storage/ISecurePreferences;
+      93: aload_0       
+      94: getfield      #29                 // Field secureStoreForTest:Lorg/eclipse/equinox/security/storage/ISecurePreferences;
+      97: ldc           #243                // String /GIT
+      99: invokeinterface #75,  2           // InterfaceMethod org/eclipse/equinox/security/storage/ISecurePreferences.node:(Ljava/lang/String;)Lorg/eclipse/equinox/security/storage/ISecurePreferences;
+     104: invokeinterface #245,  1          // InterfaceMethod org/eclipse/equinox/security/storage/ISecurePreferences.removeNode:()V
+     109: return        
+}

@@ -1,0 +1,765 @@
+Compiled from "IndexDiffCacheTest.java"
+public class org.eclipse.egit.core.internal.indexdiff.IndexDiffCacheTest extends org.eclipse.egit.core.test.GitTestCase {
+  org.eclipse.egit.core.test.TestRepository testRepository;
+
+  org.eclipse.jgit.lib.Repository repository;
+
+  private java.util.concurrent.atomic.AtomicBoolean listenerCalled;
+
+  private java.util.concurrent.atomic.AtomicReference<org.eclipse.egit.core.internal.indexdiff.IndexDiffData> indexDiffDataResult;
+
+  public org.eclipse.egit.core.internal.indexdiff.IndexDiffCacheTest();
+    Code:
+       0: aload_0       
+       1: invokespecial #18                 // Method org/eclipse/egit/core/test/GitTestCase."<init>":()V
+       4: return        
+
+  public void setUp() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: invokespecial #30                 // Method org/eclipse/egit/core/test/GitTestCase.setUp:()V
+       4: aload_0       
+       5: new           #32                 // class org/eclipse/egit/core/test/TestRepository
+       8: dup           
+       9: aload_0       
+      10: getfield      #34                 // Field gitDir:Ljava/io/File;
+      13: invokespecial #38                 // Method org/eclipse/egit/core/test/TestRepository."<init>":(Ljava/io/File;)V
+      16: putfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      19: aload_0       
+      20: aload_0       
+      21: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      24: invokevirtual #43                 // Method org/eclipse/egit/core/test/TestRepository.getRepository:()Lorg/eclipse/jgit/lib/Repository;
+      27: putfield      #47                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+      30: return        
+
+  public void tearDown() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+       4: invokevirtual #51                 // Method org/eclipse/egit/core/test/TestRepository.dispose:()V
+       7: aload_0       
+       8: aconst_null   
+       9: putfield      #47                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+      12: aload_0       
+      13: invokespecial #54                 // Method org/eclipse/egit/core/test/GitTestCase.tearDown:()V
+      16: return        
+
+  public void testAddingAFile() throws java.lang.Exception;
+    Code:
+       0: new           #58                 // class org/eclipse/egit/core/op/ConnectProviderOperation
+       3: dup           
+       4: aload_0       
+       5: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+       8: getfield      #64                 // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      11: aload_0       
+      12: getfield      #47                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+      15: invokevirtual #69                 // Method org/eclipse/jgit/lib/Repository.getDirectory:()Ljava/io/File;
+      18: invokespecial #75                 // Method org/eclipse/egit/core/op/ConnectProviderOperation."<init>":(Lorg/eclipse/core/resources/IProject;Ljava/io/File;)V
+      21: aconst_null   
+      22: invokevirtual #78                 // Method org/eclipse/egit/core/op/ConnectProviderOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+      25: aload_0       
+      26: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      29: ldc           #82                 // String testBranchOperation\n\nfirst commit\n
+      31: invokevirtual #84                 // Method org/eclipse/egit/core/test/TestRepository.createInitialCommit:(Ljava/lang/String;)Lorg/eclipse/jgit/revwalk/RevCommit;
+      34: pop           
+      35: aload_0       
+      36: invokespecial #88                 // Method prepareCacheEntry:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffCacheEntry;
+      39: pop           
+      40: aload_0       
+      41: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+      44: pop           
+      45: aload_0       
+      46: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      49: ldc           #96                 // String aFile
+      51: ldc           #98                 // String content
+      53: ldc           #100                // String UTF-8
+      55: invokevirtual #102                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+      58: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+      61: pop           
+      62: aload_0       
+      63: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+      66: astore_1      
+      67: aload_0       
+      68: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      71: getfield      #64                 // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      74: ldc           #96                 // String aFile
+      76: invokeinterface #112,  2          // InterfaceMethod org/eclipse/core/resources/IProject.getFile:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+      81: invokeinterface #118,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getFullPath:()Lorg/eclipse/core/runtime/IPath;
+      86: invokeinterface #124,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toString:()Ljava/lang/String;
+      91: iconst_1      
+      92: invokevirtual #130                // Method java/lang/String.substring:(I)Ljava/lang/String;
+      95: astore_2      
+      96: aload_1       
+      97: invokevirtual #134                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getUntracked:()Ljava/util/Set;
+     100: aload_2       
+     101: invokeinterface #140,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+     106: ifne          114
+     109: ldc           #146                // String IndexDiffData did not contain aFile as untracked
+     111: invokestatic  #148                // Method org/junit/Assert.fail:(Ljava/lang/String;)V
+     114: new           #154                // class org/eclipse/jgit/api/Git
+     117: dup           
+     118: aload_0       
+     119: getfield      #47                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+     122: invokespecial #156                // Method org/eclipse/jgit/api/Git."<init>":(Lorg/eclipse/jgit/lib/Repository;)V
+     125: invokevirtual #159                // Method org/eclipse/jgit/api/Git.add:()Lorg/eclipse/jgit/api/AddCommand;
+     128: aload_2       
+     129: invokevirtual #163                // Method org/eclipse/jgit/api/AddCommand.addFilepattern:(Ljava/lang/String;)Lorg/eclipse/jgit/api/AddCommand;
+     132: invokevirtual #169                // Method org/eclipse/jgit/api/AddCommand.call:()Lorg/eclipse/jgit/dircache/DirCache;
+     135: pop           
+     136: aload_0       
+     137: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+     140: astore_3      
+     141: aload_3       
+     142: invokevirtual #134                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getUntracked:()Ljava/util/Set;
+     145: aload_2       
+     146: invokeinterface #140,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+     151: ifeq          159
+     154: ldc           #173                // String IndexDiffData contains aFile as untracked
+     156: invokestatic  #148                // Method org/junit/Assert.fail:(Ljava/lang/String;)V
+     159: aload_3       
+     160: invokevirtual #175                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getAdded:()Ljava/util/Set;
+     163: aload_2       
+     164: invokeinterface #140,  2          // InterfaceMethod java/util/Set.contains:(Ljava/lang/Object;)Z
+     169: ifne          177
+     172: ldc           #178                // String IndexDiffData does not contain aFile as added
+     174: invokestatic  #148                // Method org/junit/Assert.fail:(Ljava/lang/String;)V
+     177: return        
+
+  public void testAddFileFromUntrackedFolder() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+       4: aload_0       
+       5: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+       8: getfield      #64                 // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      11: invokevirtual #187                // Method org/eclipse/egit/core/test/TestRepository.connect:(Lorg/eclipse/core/resources/IProject;)V
+      14: aload_0       
+      15: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      18: aload_0       
+      19: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      22: getfield      #64                 // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      25: invokevirtual #191                // Method org/eclipse/egit/core/test/TestRepository.addToIndex:(Lorg/eclipse/core/resources/IResource;)V
+      28: aload_0       
+      29: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      32: ldc           #195                // String testAddFileFromUntrackedFolder\n\nfirst commit\n
+      34: invokevirtual #84                 // Method org/eclipse/egit/core/test/TestRepository.createInitialCommit:(Ljava/lang/String;)Lorg/eclipse/jgit/revwalk/RevCommit;
+      37: pop           
+      38: aload_0       
+      39: invokespecial #88                 // Method prepareCacheEntry:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffCacheEntry;
+      42: pop           
+      43: aload_0       
+      44: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      47: ldc           #197                // String folder
+      49: invokevirtual #199                // Method org/eclipse/egit/core/test/TestProject.createFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+      52: pop           
+      53: aload_0       
+      54: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      57: ldc           #203                // String folder/a
+      59: invokevirtual #199                // Method org/eclipse/egit/core/test/TestProject.createFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+      62: pop           
+      63: aload_0       
+      64: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      67: ldc           #205                // String folder/b
+      69: invokevirtual #199                // Method org/eclipse/egit/core/test/TestProject.createFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+      72: pop           
+      73: aload_0       
+      74: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      77: ldc           #207                // String folder/a/file
+      79: iconst_0      
+      80: newarray       byte
+      82: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+      85: astore_1      
+      86: aload_0       
+      87: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      90: ldc           #209                // String folder/b/file
+      92: iconst_0      
+      93: newarray       byte
+      95: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+      98: pop           
+      99: aload_0       
+     100: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+     103: astore_2      
+     104: aload_2       
+     105: invokevirtual #211                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getUntrackedFolders:()Ljava/util/Set;
+     108: ldc           #214                // String Project-1/folder/
+     110: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     113: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     116: aload_0       
+     117: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+     120: aload_1       
+     121: invokeinterface #226,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     126: invokeinterface #229,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toFile:()Ljava/io/File;
+     131: invokevirtual #232                // Method org/eclipse/egit/core/test/TestRepository.track:(Ljava/io/File;)V
+     134: aload_0       
+     135: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+     138: astore_3      
+     139: aload_3       
+     140: invokevirtual #175                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getAdded:()Ljava/util/Set;
+     143: ldc           #235                // String Project-1/folder/a/file
+     145: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     148: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     151: aload_3       
+     152: invokevirtual #211                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getUntrackedFolders:()Ljava/util/Set;
+     155: ldc           #214                // String Project-1/folder/
+     157: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     160: invokestatic  #237                // Method org/hamcrest/CoreMatchers.not:(Lorg/hamcrest/Matcher;)Lorg/hamcrest/Matcher;
+     163: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     166: aload_3       
+     167: invokevirtual #211                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getUntrackedFolders:()Ljava/util/Set;
+     170: ldc           #243                // String Project-1/folder/a
+     172: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     175: invokestatic  #237                // Method org/hamcrest/CoreMatchers.not:(Lorg/hamcrest/Matcher;)Lorg/hamcrest/Matcher;
+     178: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     181: aload_3       
+     182: invokevirtual #211                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getUntrackedFolders:()Ljava/util/Set;
+     185: ldc           #245                // String Project-1/folder/b/
+     187: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     190: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     193: return        
+
+  public void testAddIgnoredFolder() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+       4: aload_0       
+       5: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+       8: getfield      #64                 // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      11: invokevirtual #187                // Method org/eclipse/egit/core/test/TestRepository.connect:(Lorg/eclipse/core/resources/IProject;)V
+      14: aload_0       
+      15: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      18: ldc           #252                // String .gitignore
+      20: ldc           #254                // String ignore\n
+      22: ldc           #100                // String UTF-8
+      24: invokevirtual #102                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+      27: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+      30: pop           
+      31: aload_0       
+      32: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      35: ldc_w         #256                // String ignore
+      38: invokevirtual #199                // Method org/eclipse/egit/core/test/TestProject.createFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+      41: pop           
+      42: aload_0       
+      43: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      46: ldc_w         #258                // String ignore/file.txt
+      49: iconst_0      
+      50: newarray       byte
+      52: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+      55: pop           
+      56: aload_0       
+      57: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      60: ldc_w         #260                // String sub
+      63: invokevirtual #199                // Method org/eclipse/egit/core/test/TestProject.createFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+      66: pop           
+      67: aload_0       
+      68: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      71: aload_0       
+      72: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      75: getfield      #64                 // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      78: invokevirtual #191                // Method org/eclipse/egit/core/test/TestRepository.addToIndex:(Lorg/eclipse/core/resources/IResource;)V
+      81: aload_0       
+      82: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      85: ldc_w         #262                // String testAddFileInIgnoredFolder\n\nfirst commit\n
+      88: invokevirtual #84                 // Method org/eclipse/egit/core/test/TestRepository.createInitialCommit:(Ljava/lang/String;)Lorg/eclipse/jgit/revwalk/RevCommit;
+      91: pop           
+      92: aload_0       
+      93: invokespecial #88                 // Method prepareCacheEntry:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffCacheEntry;
+      96: pop           
+      97: aload_0       
+      98: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+     101: astore_1      
+     102: aload_1       
+     103: invokevirtual #264                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getIgnoredNotInIndex:()Ljava/util/Set;
+     106: ldc_w         #267                // String Project-1/ignore
+     109: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     112: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     115: aload_0       
+     116: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+     119: ldc_w         #269                // String sub/ignore
+     122: invokevirtual #199                // Method org/eclipse/egit/core/test/TestProject.createFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+     125: pop           
+     126: aload_0       
+     127: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+     130: astore_2      
+     131: aload_2       
+     132: invokevirtual #264                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getIgnoredNotInIndex:()Ljava/util/Set;
+     135: ldc_w         #267                // String Project-1/ignore
+     138: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     141: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     144: aload_2       
+     145: invokevirtual #264                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getIgnoredNotInIndex:()Ljava/util/Set;
+     148: ldc_w         #271                // String Project-1/sub/ignore
+     151: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     154: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     157: aload_0       
+     158: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+     161: ldc_w         #273                // String sub/ignorenot
+     164: iconst_0      
+     165: newarray       byte
+     167: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+     170: pop           
+     171: aload_0       
+     172: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+     175: astore_3      
+     176: aload_3       
+     177: invokevirtual #134                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getUntracked:()Ljava/util/Set;
+     180: ldc_w         #275                // String Project-1/sub/ignorenot
+     183: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     186: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     189: aload_3       
+     190: invokevirtual #264                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getIgnoredNotInIndex:()Ljava/util/Set;
+     193: ldc_w         #267                // String Project-1/ignore
+     196: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     199: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     202: aload_3       
+     203: invokevirtual #264                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getIgnoredNotInIndex:()Ljava/util/Set;
+     206: ldc_w         #271                // String Project-1/sub/ignore
+     209: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     212: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     215: return        
+
+  public void testRemoveIgnoredFile() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+       4: aload_0       
+       5: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+       8: getfield      #64                 // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      11: invokevirtual #187                // Method org/eclipse/egit/core/test/TestRepository.connect:(Lorg/eclipse/core/resources/IProject;)V
+      14: aload_0       
+      15: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      18: ldc           #252                // String .gitignore
+      20: ldc           #254                // String ignore\n
+      22: ldc           #100                // String UTF-8
+      24: invokevirtual #102                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+      27: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+      30: pop           
+      31: aload_0       
+      32: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      35: ldc_w         #260                // String sub
+      38: invokevirtual #199                // Method org/eclipse/egit/core/test/TestProject.createFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+      41: pop           
+      42: aload_0       
+      43: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      46: ldc_w         #269                // String sub/ignore
+      49: iconst_0      
+      50: newarray       byte
+      52: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+      55: astore_1      
+      56: aload_0       
+      57: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      60: aload_0       
+      61: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      64: getfield      #64                 // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      67: invokevirtual #191                // Method org/eclipse/egit/core/test/TestRepository.addToIndex:(Lorg/eclipse/core/resources/IResource;)V
+      70: aload_0       
+      71: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      74: ldc_w         #279                // String testRemoveIgnoredFile\n\nfirst commit\n
+      77: invokevirtual #84                 // Method org/eclipse/egit/core/test/TestRepository.createInitialCommit:(Ljava/lang/String;)Lorg/eclipse/jgit/revwalk/RevCommit;
+      80: pop           
+      81: aload_0       
+      82: invokespecial #88                 // Method prepareCacheEntry:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffCacheEntry;
+      85: astore_2      
+      86: aload_0       
+      87: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+      90: astore_3      
+      91: aload_3       
+      92: invokevirtual #264                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getIgnoredNotInIndex:()Ljava/util/Set;
+      95: ldc_w         #271                // String Project-1/sub/ignore
+      98: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     101: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     104: aload_0       
+     105: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+     108: ldc_w         #273                // String sub/ignorenot
+     111: iconst_0      
+     112: newarray       byte
+     114: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+     117: pop           
+     118: aload_0       
+     119: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+     122: astore        4
+     124: aload         4
+     126: invokevirtual #264                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getIgnoredNotInIndex:()Ljava/util/Set;
+     129: ldc_w         #271                // String Project-1/sub/ignore
+     132: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     135: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     138: aload_1       
+     139: iconst_0      
+     140: aconst_null   
+     141: invokeinterface #281,  3          // InterfaceMethod org/eclipse/core/resources/IFile.delete:(ZLorg/eclipse/core/runtime/IProgressMonitor;)V
+     146: aload_0       
+     147: invokespecial #285                // Method waitForListenerNotCalled:()V
+     150: aload_2       
+     151: invokevirtual #288                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffCacheEntry.refresh:()V
+     154: aload_0       
+     155: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+     158: astore        5
+     160: aload         5
+     162: invokevirtual #264                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getIgnoredNotInIndex:()Ljava/util/Set;
+     165: ldc_w         #271                // String Project-1/sub/ignore
+     168: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     171: invokestatic  #237                // Method org/hamcrest/CoreMatchers.not:(Lorg/hamcrest/Matcher;)Lorg/hamcrest/Matcher;
+     174: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     177: return        
+
+  public void testAddAndRemoveGitIgnoreFileToIgnoredDir() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+       4: aload_0       
+       5: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+       8: getfield      #64                 // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      11: invokevirtual #187                // Method org/eclipse/egit/core/test/TestRepository.connect:(Lorg/eclipse/core/resources/IProject;)V
+      14: aload_0       
+      15: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      18: ldc           #252                // String .gitignore
+      20: ldc           #254                // String ignore\n
+      22: ldc           #100                // String UTF-8
+      24: invokevirtual #102                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+      27: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+      30: pop           
+      31: aload_0       
+      32: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      35: ldc_w         #260                // String sub
+      38: invokevirtual #199                // Method org/eclipse/egit/core/test/TestProject.createFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+      41: pop           
+      42: aload_0       
+      43: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      46: ldc_w         #269                // String sub/ignore
+      49: iconst_0      
+      50: newarray       byte
+      52: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+      55: pop           
+      56: aload_0       
+      57: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      60: aload_0       
+      61: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      64: getfield      #64                 // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      67: invokevirtual #191                // Method org/eclipse/egit/core/test/TestRepository.addToIndex:(Lorg/eclipse/core/resources/IResource;)V
+      70: aload_0       
+      71: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      74: ldc_w         #279                // String testRemoveIgnoredFile\n\nfirst commit\n
+      77: invokevirtual #84                 // Method org/eclipse/egit/core/test/TestRepository.createInitialCommit:(Ljava/lang/String;)Lorg/eclipse/jgit/revwalk/RevCommit;
+      80: pop           
+      81: aload_0       
+      82: invokespecial #88                 // Method prepareCacheEntry:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffCacheEntry;
+      85: pop           
+      86: aload_0       
+      87: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+      90: astore_1      
+      91: aload_1       
+      92: invokevirtual #264                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getIgnoredNotInIndex:()Ljava/util/Set;
+      95: ldc_w         #271                // String Project-1/sub/ignore
+      98: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     101: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     104: aload_0       
+     105: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+     108: ldc_w         #297                // String sub/ignored
+     111: ldc_w         #299                // String Ignored
+     114: ldc           #100                // String UTF-8
+     116: invokevirtual #102                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+     119: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+     122: pop           
+     123: aload_0       
+     124: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+     127: ldc_w         #301                // String sub/.gitignore
+     130: ldc_w         #303                // String ignored\n
+     133: ldc           #100                // String UTF-8
+     135: invokevirtual #102                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+     138: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+     141: pop           
+     142: aload_0       
+     143: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+     146: astore_2      
+     147: aload_2       
+     148: invokevirtual #264                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getIgnoredNotInIndex:()Ljava/util/Set;
+     151: ldc_w         #305                // String Project-1/sub/ignored
+     154: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     157: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     160: aload_0       
+     161: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+     164: invokevirtual #307                // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+     167: ldc_w         #301                // String sub/.gitignore
+     170: invokeinterface #112,  2          // InterfaceMethod org/eclipse/core/resources/IProject.getFile:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+     175: iconst_1      
+     176: aconst_null   
+     177: invokeinterface #281,  3          // InterfaceMethod org/eclipse/core/resources/IFile.delete:(ZLorg/eclipse/core/runtime/IProgressMonitor;)V
+     182: aload_0       
+     183: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+     186: astore_3      
+     187: aload_3       
+     188: invokevirtual #134                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getUntracked:()Ljava/util/Set;
+     191: ldc_w         #305                // String Project-1/sub/ignored
+     194: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     197: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     200: return        
+
+  public void testAddAndRemoveFileToIgnoredDir() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+       4: aload_0       
+       5: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+       8: getfield      #64                 // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      11: invokevirtual #187                // Method org/eclipse/egit/core/test/TestRepository.connect:(Lorg/eclipse/core/resources/IProject;)V
+      14: aload_0       
+      15: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      18: ldc           #252                // String .gitignore
+      20: ldc_w         #312                // String sub\n
+      23: ldc           #100                // String UTF-8
+      25: invokevirtual #102                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+      28: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+      31: pop           
+      32: aload_0       
+      33: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      36: ldc_w         #260                // String sub
+      39: invokevirtual #199                // Method org/eclipse/egit/core/test/TestProject.createFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+      42: pop           
+      43: aload_0       
+      44: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      47: ldc_w         #269                // String sub/ignore
+      50: iconst_0      
+      51: newarray       byte
+      53: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+      56: pop           
+      57: aload_0       
+      58: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      61: aload_0       
+      62: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      65: getfield      #64                 // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      68: invokevirtual #191                // Method org/eclipse/egit/core/test/TestRepository.addToIndex:(Lorg/eclipse/core/resources/IResource;)V
+      71: aload_0       
+      72: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      75: ldc_w         #279                // String testRemoveIgnoredFile\n\nfirst commit\n
+      78: invokevirtual #84                 // Method org/eclipse/egit/core/test/TestRepository.createInitialCommit:(Ljava/lang/String;)Lorg/eclipse/jgit/revwalk/RevCommit;
+      81: pop           
+      82: aload_0       
+      83: invokespecial #88                 // Method prepareCacheEntry:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffCacheEntry;
+      86: pop           
+      87: aload_0       
+      88: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+      91: astore_1      
+      92: aload_1       
+      93: invokevirtual #264                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getIgnoredNotInIndex:()Ljava/util/Set;
+      96: ldc_w         #314                // String Project-1/sub
+      99: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     102: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     105: aload_0       
+     106: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+     109: ldc_w         #297                // String sub/ignored
+     112: ldc_w         #299                // String Ignored
+     115: ldc           #100                // String UTF-8
+     117: invokevirtual #102                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+     120: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+     123: pop           
+     124: aload_0       
+     125: invokespecial #285                // Method waitForListenerNotCalled:()V
+     128: aload_0       
+     129: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+     132: invokevirtual #307                // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+     135: ldc_w         #297                // String sub/ignored
+     138: invokeinterface #112,  2          // InterfaceMethod org/eclipse/core/resources/IProject.getFile:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+     143: iconst_1      
+     144: aconst_null   
+     145: invokeinterface #281,  3          // InterfaceMethod org/eclipse/core/resources/IFile.delete:(ZLorg/eclipse/core/runtime/IProgressMonitor;)V
+     150: aload_0       
+     151: invokespecial #285                // Method waitForListenerNotCalled:()V
+     154: return        
+
+  public void testModifyFileInIgnoredDir() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+       4: aload_0       
+       5: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+       8: getfield      #64                 // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      11: invokevirtual #187                // Method org/eclipse/egit/core/test/TestRepository.connect:(Lorg/eclipse/core/resources/IProject;)V
+      14: aload_0       
+      15: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      18: ldc           #252                // String .gitignore
+      20: ldc           #254                // String ignore\n
+      22: ldc           #100                // String UTF-8
+      24: invokevirtual #102                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+      27: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+      30: pop           
+      31: aload_0       
+      32: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      35: ldc_w         #260                // String sub
+      38: invokevirtual #199                // Method org/eclipse/egit/core/test/TestProject.createFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+      41: pop           
+      42: aload_0       
+      43: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      46: ldc_w         #269                // String sub/ignore
+      49: iconst_0      
+      50: newarray       byte
+      52: invokevirtual #108                // Method org/eclipse/egit/core/test/TestProject.createFile:(Ljava/lang/String;[B)Lorg/eclipse/core/resources/IFile;
+      55: pop           
+      56: aload_0       
+      57: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      60: aload_0       
+      61: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      64: getfield      #64                 // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      67: invokevirtual #191                // Method org/eclipse/egit/core/test/TestRepository.addToIndex:(Lorg/eclipse/core/resources/IResource;)V
+      70: aload_0       
+      71: getfield      #41                 // Field testRepository:Lorg/eclipse/egit/core/test/TestRepository;
+      74: ldc_w         #279                // String testRemoveIgnoredFile\n\nfirst commit\n
+      77: invokevirtual #84                 // Method org/eclipse/egit/core/test/TestRepository.createInitialCommit:(Ljava/lang/String;)Lorg/eclipse/jgit/revwalk/RevCommit;
+      80: pop           
+      81: aload_0       
+      82: invokespecial #88                 // Method prepareCacheEntry:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffCacheEntry;
+      85: pop           
+      86: aload_0       
+      87: invokespecial #92                 // Method waitForListenerCalled:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffData;
+      90: astore_1      
+      91: aload_1       
+      92: invokevirtual #264                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffData.getIgnoredNotInIndex:()Ljava/util/Set;
+      95: ldc_w         #271                // String Project-1/sub/ignore
+      98: invokestatic  #216                // Method org/hamcrest/Matchers.hasItem:(Ljava/lang/Object;)Lorg/hamcrest/Matcher;
+     101: invokestatic  #222                // Method org/junit/Assert.assertThat:(Ljava/lang/Object;Lorg/hamcrest/Matcher;)V
+     104: aload_0       
+     105: getfield      #60                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+     108: invokevirtual #307                // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+     111: ldc_w         #269                // String sub/ignore
+     114: invokeinterface #112,  2          // InterfaceMethod org/eclipse/core/resources/IProject.getFile:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+     119: astore_2      
+     120: new           #317                // class java/io/FileOutputStream
+     123: dup           
+     124: aload_2       
+     125: invokeinterface #226,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     130: invokeinterface #229,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toFile:()Ljava/io/File;
+     135: invokespecial #319                // Method java/io/FileOutputStream."<init>":(Ljava/io/File;)V
+     138: astore_3      
+     139: aload_3       
+     140: ldc_w         #320                // String other contents
+     143: ldc           #100                // String UTF-8
+     145: invokevirtual #102                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+     148: invokevirtual #322                // Method java/io/FileOutputStream.write:([B)V
+     151: goto          163
+     154: astore        4
+     156: aload_3       
+     157: invokevirtual #326                // Method java/io/FileOutputStream.close:()V
+     160: aload         4
+     162: athrow        
+     163: aload_3       
+     164: invokevirtual #326                // Method java/io/FileOutputStream.close:()V
+     167: aload_0       
+     168: invokespecial #285                // Method waitForListenerNotCalled:()V
+     171: return        
+    Exception table:
+       from    to  target type
+         139   154   154   any
+
+  private org.eclipse.egit.core.internal.indexdiff.IndexDiffCacheEntry prepareCacheEntry();
+    Code:
+       0: invokestatic  #333                // Method org/eclipse/egit/core/Activator.getDefault:()Lorg/eclipse/egit/core/Activator;
+       3: invokevirtual #339                // Method org/eclipse/egit/core/Activator.getIndexDiffCache:()Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffCache;
+       6: astore_1      
+       7: aload_1       
+       8: aload_0       
+       9: getfield      #47                 // Field repository:Lorg/eclipse/jgit/lib/Repository;
+      12: invokevirtual #343                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffCache.getIndexDiffCacheEntry:(Lorg/eclipse/jgit/lib/Repository;)Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffCacheEntry;
+      15: astore_2      
+      16: aload_0       
+      17: new           #349                // class java/util/concurrent/atomic/AtomicBoolean
+      20: dup           
+      21: iconst_0      
+      22: invokespecial #351                // Method java/util/concurrent/atomic/AtomicBoolean."<init>":(Z)V
+      25: putfield      #354                // Field listenerCalled:Ljava/util/concurrent/atomic/AtomicBoolean;
+      28: aload_0       
+      29: new           #356                // class java/util/concurrent/atomic/AtomicReference
+      32: dup           
+      33: aconst_null   
+      34: invokespecial #358                // Method java/util/concurrent/atomic/AtomicReference."<init>":(Ljava/lang/Object;)V
+      37: putfield      #361                // Field indexDiffDataResult:Ljava/util/concurrent/atomic/AtomicReference;
+      40: aload_2       
+      41: new           #363                // class org/eclipse/egit/core/internal/indexdiff/IndexDiffCacheTest$1
+      44: dup           
+      45: aload_0       
+      46: invokespecial #365                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffCacheTest$1."<init>":(Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffCacheTest;)V
+      49: invokevirtual #368                // Method org/eclipse/egit/core/internal/indexdiff/IndexDiffCacheEntry.addIndexDiffChangedListener:(Lorg/eclipse/egit/core/internal/indexdiff/IndexDiffChangedListener;)V
+      52: aload_2       
+      53: areturn       
+
+  private org.eclipse.egit.core.internal.indexdiff.IndexDiffData waitForListenerCalled() throws java.lang.InterruptedException;
+    Code:
+       0: lconst_0      
+       1: lstore_1      
+       2: goto          17
+       5: ldc2_w        #377                // long 100l
+       8: invokestatic  #379                // Method java/lang/Thread.sleep:(J)V
+      11: lload_1       
+      12: ldc2_w        #377                // long 100l
+      15: ladd          
+      16: lstore_1      
+      17: aload_0       
+      18: getfield      #354                // Field listenerCalled:Ljava/util/concurrent/atomic/AtomicBoolean;
+      21: invokevirtual #385                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+      24: ifne          35
+      27: lload_1       
+      28: ldc2_w        #389                // long 60000l
+      31: lcmp          
+      32: iflt          5
+      35: new           #391                // class java/lang/StringBuilder
+      38: dup           
+      39: ldc_w         #393                // String indexDiffChanged was not called after 
+      42: invokespecial #395                // Method java/lang/StringBuilder."<init>":(Ljava/lang/String;)V
+      45: lload_1       
+      46: invokevirtual #397                // Method java/lang/StringBuilder.append:(J)Ljava/lang/StringBuilder;
+      49: ldc_w         #401                // String  ms
+      52: invokevirtual #403                // Method java/lang/StringBuilder.append:(Ljava/lang/String;)Ljava/lang/StringBuilder;
+      55: invokevirtual #406                // Method java/lang/StringBuilder.toString:()Ljava/lang/String;
+      58: aload_0       
+      59: getfield      #354                // Field listenerCalled:Ljava/util/concurrent/atomic/AtomicBoolean;
+      62: invokevirtual #385                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+      65: invokestatic  #407                // Method org/junit/Assert.assertTrue:(Ljava/lang/String;Z)V
+      68: aload_0       
+      69: getfield      #354                // Field listenerCalled:Ljava/util/concurrent/atomic/AtomicBoolean;
+      72: iconst_0      
+      73: invokevirtual #411                // Method java/util/concurrent/atomic/AtomicBoolean.set:(Z)V
+      76: aload_0       
+      77: getfield      #361                // Field indexDiffDataResult:Ljava/util/concurrent/atomic/AtomicReference;
+      80: invokevirtual #414                // Method java/util/concurrent/atomic/AtomicReference.get:()Ljava/lang/Object;
+      83: checkcast     #135                // class org/eclipse/egit/core/internal/indexdiff/IndexDiffData
+      86: areturn       
+
+  private void waitForListenerNotCalled() throws java.lang.InterruptedException;
+    Code:
+       0: lconst_0      
+       1: lstore_1      
+       2: goto          17
+       5: ldc2_w        #377                // long 100l
+       8: invokestatic  #379                // Method java/lang/Thread.sleep:(J)V
+      11: lload_1       
+      12: ldc2_w        #377                // long 100l
+      15: ladd          
+      16: lstore_1      
+      17: aload_0       
+      18: getfield      #354                // Field listenerCalled:Ljava/util/concurrent/atomic/AtomicBoolean;
+      21: invokevirtual #385                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+      24: ifne          35
+      27: lload_1       
+      28: ldc2_w        #419                // long 1000l
+      31: lcmp          
+      32: iflt          5
+      35: ldc_w         #421                // String indexDiffChanged was called where it shouldn't have been
+      38: aload_0       
+      39: getfield      #354                // Field listenerCalled:Ljava/util/concurrent/atomic/AtomicBoolean;
+      42: invokevirtual #385                // Method java/util/concurrent/atomic/AtomicBoolean.get:()Z
+      45: ifeq          52
+      48: iconst_0      
+      49: goto          53
+      52: iconst_1      
+      53: invokestatic  #407                // Method org/junit/Assert.assertTrue:(Ljava/lang/String;Z)V
+      56: return        
+
+  static java.util.concurrent.atomic.AtomicBoolean access$0(org.eclipse.egit.core.internal.indexdiff.IndexDiffCacheTest);
+    Code:
+       0: aload_0       
+       1: getfield      #354                // Field listenerCalled:Ljava/util/concurrent/atomic/AtomicBoolean;
+       4: areturn       
+
+  static java.util.concurrent.atomic.AtomicReference access$1(org.eclipse.egit.core.internal.indexdiff.IndexDiffCacheTest);
+    Code:
+       0: aload_0       
+       1: getfield      #361                // Field indexDiffDataResult:Ljava/util/concurrent/atomic/AtomicReference;
+       4: areturn       
+}

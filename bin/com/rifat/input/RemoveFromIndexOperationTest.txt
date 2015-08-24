@@ -1,0 +1,654 @@
+Compiled from "RemoveFromIndexOperationTest.java"
+public class org.eclipse.egit.core.test.op.RemoveFromIndexOperationTest extends org.eclipse.egit.core.test.GitTestCase {
+  private org.eclipse.egit.core.test.TestRepository testRepo;
+
+  private java.io.File gitDir2;
+
+  private org.eclipse.egit.core.test.TestRepository testRepo2;
+
+  private org.eclipse.egit.core.test.TestProject project2;
+
+  public org.eclipse.egit.core.test.op.RemoveFromIndexOperationTest();
+    Code:
+       0: aload_0       
+       1: invokespecial #15                 // Method org/eclipse/egit/core/test/GitTestCase."<init>":()V
+       4: return        
+
+  public void setUp() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: invokespecial #27                 // Method org/eclipse/egit/core/test/GitTestCase.setUp:()V
+       4: aload_0       
+       5: new           #29                 // class java/io/File
+       8: dup           
+       9: aload_0       
+      10: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      13: invokevirtual #34                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      16: invokeinterface #40,  1           // InterfaceMethod org/eclipse/core/resources/IProject.getLocationURI:()Ljava/net/URI;
+      21: invokevirtual #46                 // Method java/net/URI.getPath:()Ljava/lang/String;
+      24: ldc           #52                 // String .git
+      26: invokespecial #54                 // Method java/io/File."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+      29: putfield      #57                 // Field gitDir:Ljava/io/File;
+      32: aload_0       
+      33: new           #60                 // class org/eclipse/egit/core/test/TestRepository
+      36: dup           
+      37: aload_0       
+      38: getfield      #57                 // Field gitDir:Ljava/io/File;
+      41: invokespecial #62                 // Method org/eclipse/egit/core/test/TestRepository."<init>":(Ljava/io/File;)V
+      44: putfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+      47: aload_0       
+      48: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+      51: aload_0       
+      52: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      55: invokevirtual #34                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      58: invokevirtual #67                 // Method org/eclipse/egit/core/test/TestRepository.connect:(Lorg/eclipse/core/resources/IProject;)V
+      61: aload_0       
+      62: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+      65: ldc           #71                 // String initial commit
+      67: invokevirtual #73                 // Method org/eclipse/egit/core/test/TestRepository.commit:(Ljava/lang/String;)Lorg/eclipse/jgit/revwalk/RevCommit;
+      70: pop           
+      71: aload_0       
+      72: new           #35                 // class org/eclipse/egit/core/test/TestProject
+      75: dup           
+      76: iconst_1      
+      77: ldc           #77                 // String Project-2
+      79: invokespecial #79                 // Method org/eclipse/egit/core/test/TestProject."<init>":(ZLjava/lang/String;)V
+      82: putfield      #82                 // Field project2:Lorg/eclipse/egit/core/test/TestProject;
+      85: aload_0       
+      86: new           #29                 // class java/io/File
+      89: dup           
+      90: aload_0       
+      91: getfield      #82                 // Field project2:Lorg/eclipse/egit/core/test/TestProject;
+      94: invokevirtual #34                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      97: invokeinterface #40,  1           // InterfaceMethod org/eclipse/core/resources/IProject.getLocationURI:()Ljava/net/URI;
+     102: invokevirtual #46                 // Method java/net/URI.getPath:()Ljava/lang/String;
+     105: ldc           #52                 // String .git
+     107: invokespecial #54                 // Method java/io/File."<init>":(Ljava/lang/String;Ljava/lang/String;)V
+     110: putfield      #84                 // Field gitDir2:Ljava/io/File;
+     113: aload_0       
+     114: new           #60                 // class org/eclipse/egit/core/test/TestRepository
+     117: dup           
+     118: aload_0       
+     119: getfield      #84                 // Field gitDir2:Ljava/io/File;
+     122: invokespecial #62                 // Method org/eclipse/egit/core/test/TestRepository."<init>":(Ljava/io/File;)V
+     125: putfield      #86                 // Field testRepo2:Lorg/eclipse/egit/core/test/TestRepository;
+     128: aload_0       
+     129: getfield      #86                 // Field testRepo2:Lorg/eclipse/egit/core/test/TestRepository;
+     132: aload_0       
+     133: getfield      #82                 // Field project2:Lorg/eclipse/egit/core/test/TestProject;
+     136: invokevirtual #34                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+     139: invokevirtual #67                 // Method org/eclipse/egit/core/test/TestRepository.connect:(Lorg/eclipse/core/resources/IProject;)V
+     142: aload_0       
+     143: getfield      #86                 // Field testRepo2:Lorg/eclipse/egit/core/test/TestRepository;
+     146: ldc           #88                 // String initial commit repo 2
+     148: invokevirtual #73                 // Method org/eclipse/egit/core/test/TestRepository.commit:(Ljava/lang/String;)Lorg/eclipse/jgit/revwalk/RevCommit;
+     151: pop           
+     152: return        
+
+  public void tearDown() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+       4: invokevirtual #92                 // Method org/eclipse/egit/core/test/TestRepository.dispose:()V
+       7: aload_0       
+       8: getfield      #86                 // Field testRepo2:Lorg/eclipse/egit/core/test/TestRepository;
+      11: invokevirtual #92                 // Method org/eclipse/egit/core/test/TestRepository.dispose:()V
+      14: aload_0       
+      15: getfield      #82                 // Field project2:Lorg/eclipse/egit/core/test/TestProject;
+      18: invokevirtual #95                 // Method org/eclipse/egit/core/test/TestProject.dispose:()V
+      21: aload_0       
+      22: getfield      #84                 // Field gitDir2:Ljava/io/File;
+      25: invokevirtual #96                 // Method java/io/File.exists:()Z
+      28: ifeq          39
+      31: aload_0       
+      32: getfield      #84                 // Field gitDir2:Ljava/io/File;
+      35: iconst_3      
+      36: invokestatic  #100                // Method org/eclipse/jgit/util/FileUtils.delete:(Ljava/io/File;I)V
+      39: aload_0       
+      40: invokespecial #106                // Method org/eclipse/egit/core/test/GitTestCase.tearDown:()V
+      43: return        
+
+  public void testShouldUnTrackFile() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: ldc           #111                // String a.txt
+       3: invokespecial #113                // Method createFileInRepo:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+       6: astore_1      
+       7: new           #117                // class org/eclipse/egit/core/op/AddToIndexOperation
+      10: dup           
+      11: iconst_1      
+      12: anewarray     #119                // class org/eclipse/core/resources/IFile
+      15: dup           
+      16: iconst_0      
+      17: aload_1       
+      18: aastore       
+      19: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      22: invokespecial #127                // Method org/eclipse/egit/core/op/AddToIndexOperation."<init>":(Ljava/util/Collection;)V
+      25: aconst_null   
+      26: invokevirtual #130                // Method org/eclipse/egit/core/op/AddToIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+      29: new           #134                // class org/eclipse/egit/core/op/RemoveFromIndexOperation
+      32: dup           
+      33: iconst_1      
+      34: anewarray     #136                // class org/eclipse/core/runtime/IPath
+      37: dup           
+      38: iconst_0      
+      39: aload_1       
+      40: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+      45: aastore       
+      46: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      49: invokespecial #142                // Method org/eclipse/egit/core/op/RemoveFromIndexOperation."<init>":(Ljava/util/Collection;)V
+      52: aconst_null   
+      53: invokevirtual #143                // Method org/eclipse/egit/core/op/RemoveFromIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+      56: aload_0       
+      57: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+      60: aload_1       
+      61: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+      66: invokeinterface #144,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toPortableString:()Ljava/lang/String;
+      71: invokevirtual #147                // Method org/eclipse/egit/core/test/TestRepository.removedFromIndex:(Ljava/lang/String;)Z
+      74: invokestatic  #151                // Method org/junit/Assert.assertTrue:(Z)V
+      77: return        
+
+  public void testShouldUnTrackFilesInFolder() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: ldc           #160                // String sub/a.txt
+       3: invokespecial #113                // Method createFileInRepo:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+       6: astore_1      
+       7: aload_0       
+       8: ldc           #162                // String sub/b.txt
+      10: invokespecial #113                // Method createFileInRepo:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+      13: astore_2      
+      14: aload_0       
+      15: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      18: invokevirtual #34                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      21: ldc           #164                // String sub
+      23: invokeinterface #166,  2          // InterfaceMethod org/eclipse/core/resources/IProject.getFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+      28: astore_3      
+      29: new           #117                // class org/eclipse/egit/core/op/AddToIndexOperation
+      32: dup           
+      33: iconst_2      
+      34: anewarray     #119                // class org/eclipse/core/resources/IFile
+      37: dup           
+      38: iconst_0      
+      39: aload_1       
+      40: aastore       
+      41: dup           
+      42: iconst_1      
+      43: aload_2       
+      44: aastore       
+      45: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      48: invokespecial #127                // Method org/eclipse/egit/core/op/AddToIndexOperation."<init>":(Ljava/util/Collection;)V
+      51: aconst_null   
+      52: invokevirtual #130                // Method org/eclipse/egit/core/op/AddToIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+      55: new           #134                // class org/eclipse/egit/core/op/RemoveFromIndexOperation
+      58: dup           
+      59: iconst_1      
+      60: anewarray     #136                // class org/eclipse/core/runtime/IPath
+      63: dup           
+      64: iconst_0      
+      65: aload_3       
+      66: invokeinterface #170,  1          // InterfaceMethod org/eclipse/core/resources/IFolder.getLocation:()Lorg/eclipse/core/runtime/IPath;
+      71: aastore       
+      72: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      75: invokespecial #142                // Method org/eclipse/egit/core/op/RemoveFromIndexOperation."<init>":(Ljava/util/Collection;)V
+      78: aconst_null   
+      79: invokevirtual #143                // Method org/eclipse/egit/core/op/RemoveFromIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+      82: aload_0       
+      83: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+      86: aload_1       
+      87: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+      92: invokeinterface #144,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toPortableString:()Ljava/lang/String;
+      97: invokevirtual #147                // Method org/eclipse/egit/core/test/TestRepository.removedFromIndex:(Ljava/lang/String;)Z
+     100: invokestatic  #151                // Method org/junit/Assert.assertTrue:(Z)V
+     103: aload_0       
+     104: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+     107: aload_2       
+     108: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     113: invokeinterface #144,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toPortableString:()Ljava/lang/String;
+     118: invokevirtual #147                // Method org/eclipse/egit/core/test/TestRepository.removedFromIndex:(Ljava/lang/String;)Z
+     121: invokestatic  #151                // Method org/junit/Assert.assertTrue:(Z)V
+     124: return        
+
+  public void testShouldUnstExistingFile() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: ldc           #111                // String a.txt
+       3: invokespecial #113                // Method createFileInRepo:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+       6: astore_1      
+       7: new           #117                // class org/eclipse/egit/core/op/AddToIndexOperation
+      10: dup           
+      11: iconst_1      
+      12: anewarray     #119                // class org/eclipse/core/resources/IFile
+      15: dup           
+      16: iconst_0      
+      17: aload_1       
+      18: aastore       
+      19: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      22: invokespecial #127                // Method org/eclipse/egit/core/op/AddToIndexOperation."<init>":(Ljava/util/Collection;)V
+      25: aconst_null   
+      26: invokevirtual #130                // Method org/eclipse/egit/core/op/AddToIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+      29: aload_0       
+      30: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+      33: ldc           #177                // String first commit
+      35: invokevirtual #73                 // Method org/eclipse/egit/core/test/TestRepository.commit:(Ljava/lang/String;)Lorg/eclipse/jgit/revwalk/RevCommit;
+      38: pop           
+      39: ldc2_w        #179                // long 1000l
+      42: invokestatic  #181                // Method java/lang/Thread.sleep:(J)V
+      45: aload_1       
+      46: new           #187                // class java/io/ByteArrayInputStream
+      49: dup           
+      50: ldc           #189                // String other text
+      52: aload_0       
+      53: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      56: getfield      #191                // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      59: invokeinterface #194,  1          // InterfaceMethod org/eclipse/core/resources/IProject.getDefaultCharset:()Ljava/lang/String;
+      64: invokevirtual #197                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+      67: invokespecial #203                // Method java/io/ByteArrayInputStream."<init>":([B)V
+      70: iconst_0      
+      71: aconst_null   
+      72: invokeinterface #206,  4          // InterfaceMethod org/eclipse/core/resources/IFile.setContents:(Ljava/io/InputStream;ILorg/eclipse/core/runtime/IProgressMonitor;)V
+      77: new           #117                // class org/eclipse/egit/core/op/AddToIndexOperation
+      80: dup           
+      81: iconst_1      
+      82: anewarray     #119                // class org/eclipse/core/resources/IFile
+      85: dup           
+      86: iconst_0      
+      87: aload_1       
+      88: aastore       
+      89: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      92: invokespecial #127                // Method org/eclipse/egit/core/op/AddToIndexOperation."<init>":(Ljava/util/Collection;)V
+      95: aconst_null   
+      96: invokevirtual #130                // Method org/eclipse/egit/core/op/AddToIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+      99: new           #134                // class org/eclipse/egit/core/op/RemoveFromIndexOperation
+     102: dup           
+     103: iconst_1      
+     104: anewarray     #136                // class org/eclipse/core/runtime/IPath
+     107: dup           
+     108: iconst_0      
+     109: aload_1       
+     110: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     115: aastore       
+     116: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     119: invokespecial #142                // Method org/eclipse/egit/core/op/RemoveFromIndexOperation."<init>":(Ljava/util/Collection;)V
+     122: aconst_null   
+     123: invokevirtual #143                // Method org/eclipse/egit/core/op/RemoveFromIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+     126: aload_0       
+     127: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+     130: aload_1       
+     131: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     136: invokeinterface #144,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toPortableString:()Ljava/lang/String;
+     141: invokevirtual #147                // Method org/eclipse/egit/core/test/TestRepository.removedFromIndex:(Ljava/lang/String;)Z
+     144: invokestatic  #151                // Method org/junit/Assert.assertTrue:(Z)V
+     147: return        
+
+  public void testShouldUnstageFilesInFolder() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: ldc           #160                // String sub/a.txt
+       3: invokespecial #113                // Method createFileInRepo:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+       6: astore_1      
+       7: aload_0       
+       8: ldc           #162                // String sub/b.txt
+      10: invokespecial #113                // Method createFileInRepo:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+      13: astore_2      
+      14: aload_0       
+      15: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      18: invokevirtual #34                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      21: ldc           #164                // String sub
+      23: invokeinterface #166,  2          // InterfaceMethod org/eclipse/core/resources/IProject.getFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+      28: astore_3      
+      29: iconst_1      
+      30: anewarray     #171                // class org/eclipse/core/resources/IFolder
+      33: dup           
+      34: iconst_0      
+      35: aload_0       
+      36: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      39: invokevirtual #34                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      42: ldc           #164                // String sub
+      44: invokeinterface #166,  2          // InterfaceMethod org/eclipse/core/resources/IProject.getFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+      49: aastore       
+      50: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      53: astore        4
+      55: new           #117                // class org/eclipse/egit/core/op/AddToIndexOperation
+      58: dup           
+      59: aload         4
+      61: invokespecial #127                // Method org/eclipse/egit/core/op/AddToIndexOperation."<init>":(Ljava/util/Collection;)V
+      64: aconst_null   
+      65: invokevirtual #130                // Method org/eclipse/egit/core/op/AddToIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+      68: aload_0       
+      69: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+      72: ldc           #177                // String first commit
+      74: invokevirtual #73                 // Method org/eclipse/egit/core/test/TestRepository.commit:(Ljava/lang/String;)Lorg/eclipse/jgit/revwalk/RevCommit;
+      77: pop           
+      78: ldc2_w        #179                // long 1000l
+      81: invokestatic  #181                // Method java/lang/Thread.sleep:(J)V
+      84: aload_1       
+      85: new           #187                // class java/io/ByteArrayInputStream
+      88: dup           
+      89: ldc           #189                // String other text
+      91: aload_0       
+      92: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      95: getfield      #191                // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      98: invokeinterface #194,  1          // InterfaceMethod org/eclipse/core/resources/IProject.getDefaultCharset:()Ljava/lang/String;
+     103: invokevirtual #197                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+     106: invokespecial #203                // Method java/io/ByteArrayInputStream."<init>":([B)V
+     109: iconst_0      
+     110: aconst_null   
+     111: invokeinterface #206,  4          // InterfaceMethod org/eclipse/core/resources/IFile.setContents:(Ljava/io/InputStream;ILorg/eclipse/core/runtime/IProgressMonitor;)V
+     116: aload_2       
+     117: new           #187                // class java/io/ByteArrayInputStream
+     120: dup           
+     121: ldc           #189                // String other text
+     123: aload_0       
+     124: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+     127: getfield      #191                // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+     130: invokeinterface #194,  1          // InterfaceMethod org/eclipse/core/resources/IProject.getDefaultCharset:()Ljava/lang/String;
+     135: invokevirtual #197                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+     138: invokespecial #203                // Method java/io/ByteArrayInputStream."<init>":([B)V
+     141: iconst_0      
+     142: aconst_null   
+     143: invokeinterface #206,  4          // InterfaceMethod org/eclipse/core/resources/IFile.setContents:(Ljava/io/InputStream;ILorg/eclipse/core/runtime/IProgressMonitor;)V
+     148: new           #117                // class org/eclipse/egit/core/op/AddToIndexOperation
+     151: dup           
+     152: aload         4
+     154: invokespecial #127                // Method org/eclipse/egit/core/op/AddToIndexOperation."<init>":(Ljava/util/Collection;)V
+     157: aconst_null   
+     158: invokevirtual #130                // Method org/eclipse/egit/core/op/AddToIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+     161: new           #134                // class org/eclipse/egit/core/op/RemoveFromIndexOperation
+     164: dup           
+     165: iconst_1      
+     166: anewarray     #136                // class org/eclipse/core/runtime/IPath
+     169: dup           
+     170: iconst_0      
+     171: aload_3       
+     172: invokeinterface #170,  1          // InterfaceMethod org/eclipse/core/resources/IFolder.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     177: aastore       
+     178: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     181: invokespecial #142                // Method org/eclipse/egit/core/op/RemoveFromIndexOperation."<init>":(Ljava/util/Collection;)V
+     184: aconst_null   
+     185: invokevirtual #143                // Method org/eclipse/egit/core/op/RemoveFromIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+     188: aload_0       
+     189: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+     192: aload_1       
+     193: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     198: invokeinterface #144,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toPortableString:()Ljava/lang/String;
+     203: invokevirtual #147                // Method org/eclipse/egit/core/test/TestRepository.removedFromIndex:(Ljava/lang/String;)Z
+     206: invokestatic  #151                // Method org/junit/Assert.assertTrue:(Z)V
+     209: aload_0       
+     210: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+     213: aload_2       
+     214: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     219: invokeinterface #144,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toPortableString:()Ljava/lang/String;
+     224: invokevirtual #147                // Method org/eclipse/egit/core/test/TestRepository.removedFromIndex:(Ljava/lang/String;)Z
+     227: invokestatic  #151                // Method org/junit/Assert.assertTrue:(Z)V
+     230: return        
+
+  public void testShouldUnstageFilesInNestedFolder() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: ldc           #216                // String sub/next/a.txt
+       3: invokespecial #113                // Method createFileInRepo:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+       6: astore_1      
+       7: aload_0       
+       8: ldc           #218                // String sub/next/b.txt
+      10: invokespecial #113                // Method createFileInRepo:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+      13: astore_2      
+      14: aload_0       
+      15: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      18: invokevirtual #34                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      21: ldc           #164                // String sub
+      23: invokeinterface #166,  2          // InterfaceMethod org/eclipse/core/resources/IProject.getFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+      28: astore_3      
+      29: iconst_1      
+      30: anewarray     #171                // class org/eclipse/core/resources/IFolder
+      33: dup           
+      34: iconst_0      
+      35: aload_0       
+      36: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      39: invokevirtual #34                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      42: ldc           #164                // String sub
+      44: invokeinterface #166,  2          // InterfaceMethod org/eclipse/core/resources/IProject.getFolder:(Ljava/lang/String;)Lorg/eclipse/core/resources/IFolder;
+      49: aastore       
+      50: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      53: astore        4
+      55: new           #117                // class org/eclipse/egit/core/op/AddToIndexOperation
+      58: dup           
+      59: aload         4
+      61: invokespecial #127                // Method org/eclipse/egit/core/op/AddToIndexOperation."<init>":(Ljava/util/Collection;)V
+      64: aconst_null   
+      65: invokevirtual #130                // Method org/eclipse/egit/core/op/AddToIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+      68: aload_0       
+      69: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+      72: ldc           #177                // String first commit
+      74: invokevirtual #73                 // Method org/eclipse/egit/core/test/TestRepository.commit:(Ljava/lang/String;)Lorg/eclipse/jgit/revwalk/RevCommit;
+      77: pop           
+      78: ldc2_w        #179                // long 1000l
+      81: invokestatic  #181                // Method java/lang/Thread.sleep:(J)V
+      84: aload_1       
+      85: new           #187                // class java/io/ByteArrayInputStream
+      88: dup           
+      89: ldc           #189                // String other text
+      91: aload_0       
+      92: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      95: getfield      #191                // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+      98: invokeinterface #194,  1          // InterfaceMethod org/eclipse/core/resources/IProject.getDefaultCharset:()Ljava/lang/String;
+     103: invokevirtual #197                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+     106: invokespecial #203                // Method java/io/ByteArrayInputStream."<init>":([B)V
+     109: iconst_0      
+     110: aconst_null   
+     111: invokeinterface #206,  4          // InterfaceMethod org/eclipse/core/resources/IFile.setContents:(Ljava/io/InputStream;ILorg/eclipse/core/runtime/IProgressMonitor;)V
+     116: aload_2       
+     117: new           #187                // class java/io/ByteArrayInputStream
+     120: dup           
+     121: ldc           #189                // String other text
+     123: aload_0       
+     124: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+     127: getfield      #191                // Field org/eclipse/egit/core/test/TestProject.project:Lorg/eclipse/core/resources/IProject;
+     130: invokeinterface #194,  1          // InterfaceMethod org/eclipse/core/resources/IProject.getDefaultCharset:()Ljava/lang/String;
+     135: invokevirtual #197                // Method java/lang/String.getBytes:(Ljava/lang/String;)[B
+     138: invokespecial #203                // Method java/io/ByteArrayInputStream."<init>":([B)V
+     141: iconst_0      
+     142: aconst_null   
+     143: invokeinterface #206,  4          // InterfaceMethod org/eclipse/core/resources/IFile.setContents:(Ljava/io/InputStream;ILorg/eclipse/core/runtime/IProgressMonitor;)V
+     148: new           #117                // class org/eclipse/egit/core/op/AddToIndexOperation
+     151: dup           
+     152: aload         4
+     154: invokespecial #127                // Method org/eclipse/egit/core/op/AddToIndexOperation."<init>":(Ljava/util/Collection;)V
+     157: aconst_null   
+     158: invokevirtual #130                // Method org/eclipse/egit/core/op/AddToIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+     161: new           #134                // class org/eclipse/egit/core/op/RemoveFromIndexOperation
+     164: dup           
+     165: iconst_1      
+     166: anewarray     #136                // class org/eclipse/core/runtime/IPath
+     169: dup           
+     170: iconst_0      
+     171: aload_3       
+     172: invokeinterface #170,  1          // InterfaceMethod org/eclipse/core/resources/IFolder.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     177: aastore       
+     178: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     181: invokespecial #142                // Method org/eclipse/egit/core/op/RemoveFromIndexOperation."<init>":(Ljava/util/Collection;)V
+     184: aconst_null   
+     185: invokevirtual #143                // Method org/eclipse/egit/core/op/RemoveFromIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+     188: aload_0       
+     189: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+     192: aload_1       
+     193: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     198: invokeinterface #144,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toPortableString:()Ljava/lang/String;
+     203: invokevirtual #147                // Method org/eclipse/egit/core/test/TestRepository.removedFromIndex:(Ljava/lang/String;)Z
+     206: invokestatic  #151                // Method org/junit/Assert.assertTrue:(Z)V
+     209: aload_0       
+     210: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+     213: aload_2       
+     214: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     219: invokeinterface #144,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toPortableString:()Ljava/lang/String;
+     224: invokevirtual #147                // Method org/eclipse/egit/core/test/TestRepository.removedFromIndex:(Ljava/lang/String;)Z
+     227: invokestatic  #151                // Method org/junit/Assert.assertTrue:(Z)V
+     230: return        
+
+  public void testShouldUnstageFilesFromMultipleRepositories() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #221                // Field testUtils:Lorg/eclipse/egit/core/test/TestUtils;
+       4: aload_0       
+       5: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+       8: invokevirtual #34                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      11: ldc           #225                // String 1.txt
+      13: ldc           #227                // String content
+      15: invokevirtual #229                // Method org/eclipse/egit/core/test/TestUtils.addFileToProject:(Lorg/eclipse/core/resources/IProject;Ljava/lang/String;Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+      18: astore_1      
+      19: aload_0       
+      20: getfield      #221                // Field testUtils:Lorg/eclipse/egit/core/test/TestUtils;
+      23: aload_0       
+      24: getfield      #82                 // Field project2:Lorg/eclipse/egit/core/test/TestProject;
+      27: invokevirtual #34                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      30: ldc           #235                // String 2.txt
+      32: ldc           #227                // String content
+      34: invokevirtual #229                // Method org/eclipse/egit/core/test/TestUtils.addFileToProject:(Lorg/eclipse/core/resources/IProject;Ljava/lang/String;Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+      37: astore_2      
+      38: new           #117                // class org/eclipse/egit/core/op/AddToIndexOperation
+      41: dup           
+      42: iconst_1      
+      43: anewarray     #119                // class org/eclipse/core/resources/IFile
+      46: dup           
+      47: iconst_0      
+      48: aload_1       
+      49: aastore       
+      50: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      53: invokespecial #127                // Method org/eclipse/egit/core/op/AddToIndexOperation."<init>":(Ljava/util/Collection;)V
+      56: aconst_null   
+      57: invokevirtual #130                // Method org/eclipse/egit/core/op/AddToIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+      60: new           #117                // class org/eclipse/egit/core/op/AddToIndexOperation
+      63: dup           
+      64: iconst_1      
+      65: anewarray     #119                // class org/eclipse/core/resources/IFile
+      68: dup           
+      69: iconst_0      
+      70: aload_2       
+      71: aastore       
+      72: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      75: invokespecial #127                // Method org/eclipse/egit/core/op/AddToIndexOperation."<init>":(Ljava/util/Collection;)V
+      78: aconst_null   
+      79: invokevirtual #130                // Method org/eclipse/egit/core/op/AddToIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+      82: new           #134                // class org/eclipse/egit/core/op/RemoveFromIndexOperation
+      85: dup           
+      86: iconst_2      
+      87: anewarray     #136                // class org/eclipse/core/runtime/IPath
+      90: dup           
+      91: iconst_0      
+      92: aload_1       
+      93: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+      98: aastore       
+      99: dup           
+     100: iconst_1      
+     101: aload_2       
+     102: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     107: aastore       
+     108: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     111: invokespecial #142                // Method org/eclipse/egit/core/op/RemoveFromIndexOperation."<init>":(Ljava/util/Collection;)V
+     114: aconst_null   
+     115: invokevirtual #143                // Method org/eclipse/egit/core/op/RemoveFromIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+     118: aload_0       
+     119: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+     122: aload_1       
+     123: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     128: invokeinterface #144,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toPortableString:()Ljava/lang/String;
+     133: invokevirtual #147                // Method org/eclipse/egit/core/test/TestRepository.removedFromIndex:(Ljava/lang/String;)Z
+     136: invokestatic  #151                // Method org/junit/Assert.assertTrue:(Z)V
+     139: aload_0       
+     140: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+     143: aload_2       
+     144: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     149: invokeinterface #144,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toPortableString:()Ljava/lang/String;
+     154: invokevirtual #147                // Method org/eclipse/egit/core/test/TestRepository.removedFromIndex:(Ljava/lang/String;)Z
+     157: invokestatic  #151                // Method org/junit/Assert.assertTrue:(Z)V
+     160: return        
+
+  public void testShouldRemoveFromIndexOnInitialCommit() throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+       4: invokevirtual #92                 // Method org/eclipse/egit/core/test/TestRepository.dispose:()V
+       7: aload_0       
+       8: getfield      #57                 // Field gitDir:Ljava/io/File;
+      11: iconst_3      
+      12: invokestatic  #100                // Method org/eclipse/jgit/util/FileUtils.delete:(Ljava/io/File;I)V
+      15: aload_0       
+      16: new           #60                 // class org/eclipse/egit/core/test/TestRepository
+      19: dup           
+      20: aload_0       
+      21: getfield      #57                 // Field gitDir:Ljava/io/File;
+      24: invokespecial #62                 // Method org/eclipse/egit/core/test/TestRepository."<init>":(Ljava/io/File;)V
+      27: putfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+      30: aload_0       
+      31: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+      34: aload_0       
+      35: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      38: invokevirtual #34                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      41: invokevirtual #67                 // Method org/eclipse/egit/core/test/TestRepository.connect:(Lorg/eclipse/core/resources/IProject;)V
+      44: aload_0       
+      45: getfield      #221                // Field testUtils:Lorg/eclipse/egit/core/test/TestUtils;
+      48: aload_0       
+      49: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+      52: invokevirtual #34                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      55: ldc           #240                // String file.txt
+      57: ldc           #227                // String content
+      59: invokevirtual #229                // Method org/eclipse/egit/core/test/TestUtils.addFileToProject:(Lorg/eclipse/core/resources/IProject;Ljava/lang/String;Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+      62: astore_1      
+      63: new           #117                // class org/eclipse/egit/core/op/AddToIndexOperation
+      66: dup           
+      67: iconst_1      
+      68: anewarray     #119                // class org/eclipse/core/resources/IFile
+      71: dup           
+      72: iconst_0      
+      73: aload_1       
+      74: aastore       
+      75: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+      78: invokespecial #127                // Method org/eclipse/egit/core/op/AddToIndexOperation."<init>":(Ljava/util/Collection;)V
+      81: aconst_null   
+      82: invokevirtual #130                // Method org/eclipse/egit/core/op/AddToIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+      85: aload_0       
+      86: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+      89: aload_1       
+      90: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+      95: invokeinterface #242,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toString:()Ljava/lang/String;
+     100: invokevirtual #245                // Method org/eclipse/egit/core/test/TestRepository.inIndex:(Ljava/lang/String;)Z
+     103: invokestatic  #151                // Method org/junit/Assert.assertTrue:(Z)V
+     106: new           #134                // class org/eclipse/egit/core/op/RemoveFromIndexOperation
+     109: dup           
+     110: iconst_1      
+     111: anewarray     #136                // class org/eclipse/core/runtime/IPath
+     114: dup           
+     115: iconst_0      
+     116: aload_1       
+     117: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     122: aastore       
+     123: invokestatic  #121                // Method java/util/Arrays.asList:([Ljava/lang/Object;)Ljava/util/List;
+     126: invokespecial #142                // Method org/eclipse/egit/core/op/RemoveFromIndexOperation."<init>":(Ljava/util/Collection;)V
+     129: aconst_null   
+     130: invokevirtual #143                // Method org/eclipse/egit/core/op/RemoveFromIndexOperation.execute:(Lorg/eclipse/core/runtime/IProgressMonitor;)V
+     133: aload_0       
+     134: getfield      #65                 // Field testRepo:Lorg/eclipse/egit/core/test/TestRepository;
+     137: aload_1       
+     138: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     143: invokeinterface #242,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toString:()Ljava/lang/String;
+     148: invokevirtual #245                // Method org/eclipse/egit/core/test/TestRepository.inIndex:(Ljava/lang/String;)Z
+     151: invokestatic  #248                // Method org/junit/Assert.assertFalse:(Z)V
+     154: aload_1       
+     155: invokeinterface #138,  1          // InterfaceMethod org/eclipse/core/resources/IFile.getLocation:()Lorg/eclipse/core/runtime/IPath;
+     160: invokeinterface #251,  1          // InterfaceMethod org/eclipse/core/runtime/IPath.toFile:()Ljava/io/File;
+     165: invokevirtual #96                 // Method java/io/File.exists:()Z
+     168: invokestatic  #151                // Method org/junit/Assert.assertTrue:(Z)V
+     171: return        
+
+  private org.eclipse.core.resources.IFile createFileInRepo(java.lang.String) throws java.lang.Exception;
+    Code:
+       0: aload_0       
+       1: getfield      #221                // Field testUtils:Lorg/eclipse/egit/core/test/TestUtils;
+       4: aload_0       
+       5: getfield      #31                 // Field project:Lorg/eclipse/egit/core/test/TestProject;
+       8: invokevirtual #34                 // Method org/eclipse/egit/core/test/TestProject.getProject:()Lorg/eclipse/core/resources/IProject;
+      11: aload_1       
+      12: ldc_w         #256                // String some text
+      15: invokevirtual #229                // Method org/eclipse/egit/core/test/TestUtils.addFileToProject:(Lorg/eclipse/core/resources/IProject;Ljava/lang/String;Ljava/lang/String;)Lorg/eclipse/core/resources/IFile;
+      18: areturn       
+}
